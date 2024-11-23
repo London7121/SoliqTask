@@ -1,16 +1,16 @@
 import { useEffect } from 'react'
-import data from '../data/data'
+import data from '../data/ayollar'
 import Aos from 'aos';
 import 'aos/dist/aos.css'
 
-export default function OurTeachers() {
+export default function erkakalr() {
     useEffect(() => {
         Aos.init()
     }, []);
     return (
         <div>
-            <div id="teachersSection" className="my-10 h-auto">
-                <p className='text-[#0B2441] text-[28px] font-bold text-center lg:text-start'>Ommabop mahsulotlar</p>
+            <div id="ayollar" className="my-16 h-auto">
+                <p className='text-red-500 text-[28px] font-bold text-center lg:text-start'>Ayollar uchun</p>
                 <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 mt-8'>
                     {
                         data?.map((item, index) => (

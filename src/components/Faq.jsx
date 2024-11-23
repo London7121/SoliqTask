@@ -8,25 +8,25 @@ const { Panel } = Collapse;
 export default function Faq() {
     const faqs = [
         {
-            question: "Farobiy IT Academy bu nima?",
-            answer: "Farobiy IT Academy, IT sohasida bilim va ko'nikmalarni rivojlantirish uchun zamonaviy ta'lim dasturlarini o'rgatuvchi markaz.",
+            question: "Tezkor yetkazib berish xizmati",
+            answer: "Buyurtmalarni O'zbekistonning barcha hududlariga 3 kun ichida yetkazib berish",
         },
         {
-            question: "Farobiy IT Academy a'zoligimga nimalar kiradi?",
-            answer: "Farobiy IT Academy a'zoligimga kop narsalar kiradi",
+            question: "Mijozlarni rag'batlantirish tizimi",
+            answer: "Doimiy va aktiv mijozlar uchun bonuslar va o'ziga xos sovg'alar to'plami",
         },
         {
-            question: "Farobiy IT Academy dan nimani o'rganishim mumkin?",
-            answer: "Farobiy IT Academy dan kop narsalarni organish mumkin.",
+            question: "To'lov turlari",
+            answer: "Oldindan click, payme yoki buyurtmalarni qabul qilib olganingizdan so'ng o'zingizga qulay bo'lgan usulda to'lov qilish imkoniyati",
         },
         {
-            question: "Sinovim tugagandan keyin nima bo'ladi?",
-            answer: "Sinovim tugagandan keyin ish boshlanadi.",
+            question: "Call - Center",
+            answer: "Murojaat va takliflar uchun 24/7 rejimida qo'llab quvvatlash imkoniyati +998 99 744 30 10 | +998 93 367 90 67",
         },
-        {
-            question: "Farobiy IT Academy da dars bera olamanmi?",
-            answer: "Farobiy IT Academy da dars bera olasan.",
-        },
+        // {
+        //     question: "Farobiy IT Academy da dars bera olamanmi?",
+        //     answer: "Farobiy IT Academy da dars bera olasan.",
+        // },
     ];
     useEffect(() => {
         Aos.init()

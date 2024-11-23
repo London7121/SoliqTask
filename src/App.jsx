@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import logo from '../src/assets/icons/farobiy_logo.png';
+import logo from '../src/assets/icons/Power .png';
 import book from '../src/assets/icons/Book.png';
 import tell from '../src/assets/icons/call.png';
 import start from '../src/assets/icons/star.png';
@@ -15,6 +15,11 @@ import OurCourses from './pages/OurCourses';
 import OurTeachers from './pages/OurTeachers';
 import AboutUs from './pages/AboutUs';
 import Contact from './pages/Contact';
+import MaqishiyTex from './pages/MaqishiyTex';
+import Erkaklar from './pages/Erkaklar';
+import Ayollar from './pages/Ayollar';
+import Bolalar from './pages/Bolalar';
+import Kitoblar from './pages/Kitoblar';
 
 
 export default function App() {
@@ -31,19 +36,19 @@ export default function App() {
 
       {/* header section */}
       <nav className="flex flex-col md:flex-row items-center justify-between m-4">
-        <div className="flex items-center justify-between w-full md:w-auto">
+        <div className="flex items-center justify-between w-full md:w-auto gap-7 ml-4">
           <a href="/">
-            <img src={logo} alt="logo" className="w-24 h-auto cursor-pointer" />
+            <img src={logo} alt="logo" className="w-28 h-auto cursor-pointer" />
           </a>
           <ScrollLink
             to="ourCourses"
             smooth={true}
             duration={500}
             style={{ color: '#0B2441' }}
-            className="text-[15px] cursor-pointer font-medium w-[120px] h-[45px] rounded-[16px] bg-[#EAF4FF] duration-100 hover:bg-[#e0ecf8] text-[#2189FF] flex items-center justify-center gap-3 px-2 ml-2"
+            className="text-[15px] cursor-pointer font-medium w-[140px] h-[45px] rounded-[16px] bg-[#EAF4FF] duration-100 hover:bg-[#e0ecf8] text-[#2189FF] flex items-center justify-center gap-3 px-2 ml-2"
           >
-            Kurslarimiz
-            <img className='w-[200px]' src={book} alt="book" />
+            Kategoriyalar
+            <img className='w-[180px]' src={book} alt="book" />
           </ScrollLink>
           {/* Hamburger Menu Button */}
           <button
@@ -70,7 +75,7 @@ export default function App() {
             style={{ color: '#0B2441' }}
             className="text-[15px] font-medium cursor-pointer"
           >
-            Bizning ustozlarimiz
+            Ommabop mahsulotlar
           </ScrollLink>
           <ScrollLink
             to="aboutUs"
@@ -88,7 +93,7 @@ export default function App() {
             style={{ color: '#0B2441' }}
             className="text-[15px] font-medium cursor-pointer"
           >
-            FAQ
+            Ko'p so'raladigan savollar
           </ScrollLink>
           <ScrollLink
             to="contact"
@@ -100,9 +105,9 @@ export default function App() {
             Bog'lanish
           </ScrollLink>
           <AntSelect />
-          <a href="tel:+998917775411" className="w-full md:w-auto px-5 h-[45px] rounded-[16px] bg-[#EAF4FF] duration-100 hover:bg-[#e0ecf8] text-[#2189FF] text-[15px] font-semibold flex items-center justify-center gap-3">
+          <a href="tel:+998997443010" className="w-full md:w-auto px-5 h-[45px] rounded-[16px] bg-[#EAF4FF] duration-100 hover:bg-[#e0ecf8] text-[#2189FF] text-[15px] font-semibold flex items-center justify-center gap-3">
             <img src={tell} alt="tell" />
-            +998 91 7775411
+            +998 997443010
           </a>
 
         </div>
@@ -114,31 +119,43 @@ export default function App() {
           {/* Left side text */}
           <div className="w-full md:w-[50%] flex flex-col items-start h-auto md:gap-8 md:h-[250px] mb-6 md:mb-0 md:ml-10">
             <p className="text-[24px] font-medium text-[#0B2441] flex items-center gap-4 mb-4 md:mb-0">
-              Zamonaviy IT o'quv markazi
+              Power.uz
               <img className="w-[18px]" src={start} alt="start" />
             </p>
             <p className="font-bold text-[18px] lg:text-[28px] text-[#0B2441] mb-6 md:mb-0">
-              Biz sizga <span className="text-[#2189FF]">zamonaviy kasbni</span> o'rganishga va ish boshlashingizga yordam beramiz
+              Toshkent shahridagi <span className="text-[#2189FF]">eng yaxshi</span> sifatli online do'kon
             </p>
-            <button className="w-[150px] h-[45px] rounded-[16px] bg-[#2189FF] text-[#EAF4FF] text-[15px] font-medium flex items-center justify-center">
-              Kurslarni tanlash
-            </button>
+            <button className="w-[200px] h-[45px] rounded-[16px] bg-[#2189FF] text-[#EAF4FF] text-[15px] font-medium flex items-center justify-center p-1">
+              <ScrollLink
+                to="ourCourses"
+                smooth={true}
+                duration={500}
+                style={{ color: '#0B2441' }}
+                className="text-[15px] font-medium cursor-pointer"
+              >
+                Mahsulotlarni tanlash
+              </ScrollLink>            </button>
           </div>
 
           {/* Right side image */}
-          <div className="w-full md:w-auto flex justify-center md:justify-end">
-            <img className="rounded-tr-[30px] rounded-br-[30px] w-full md:w-auto" src={banner_img} alt="banner_img" />
+          <div className="w-[400px] md:w-[40%] flex justify-center md:justify-end">
+            <img className="rounded-tr-[30px] rounded-br-[30px] w-[300px] md:w-auto" src="https://m.media-amazon.com/images/I/71yGCVj4+wL.jpg" alt="banner_img" />
           </div>
         </div>
 
         {/* Our courses */}
-        <OurCourses/>
+        <OurCourses />
 
         {/* ourTeachers */}
-        <OurTeachers/>
+        <OurTeachers />
+        <MaqishiyTex />
+        <Erkaklar />
+        <Ayollar />
+        <Bolalar />
+        <Kitoblar />
 
         {/* about us */}
-        <AboutUs/>
+        <AboutUs />
 
         {/* FAQ */}
         <div id="faq" className="my-10 h-auto py-10">
@@ -147,7 +164,7 @@ export default function App() {
         </div>
 
         {/* contact section */}
-        <Contact/>
+        <Contact />
 
       </div>
       {/* footer */}

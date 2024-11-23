@@ -1,5 +1,5 @@
-import img6 from '../assets/images/img6.png';
-import img7 from '../assets/images/img7.png';
+import img6 from '../assets/images/photo_2024-11-24_02-24-32.jpg';
+import img7 from '../assets/images/photo_2024-11-24_02-27-57.jpg';
 import like from '../assets/icons/like.png';
 import medal from '../assets/icons/medal-star.png';
 import 'aos/dist/aos.css'
@@ -22,7 +22,7 @@ export default function AboutUs() {
                             data-aos-duration="1000"
                             className='w-full h-[220px] bg-[#F1E2C1] rounded-[40px] p-8 flex flex-col items-start'>
                             <img src={like} alt="like" className="mb-3" />
-                            <p className='font-medium text-[17px] md:text-[22px]'>Farobiy IT Academy - da biz oddiy ko'rinadigan yaratish harakati odamlar hayotida o'sish.</p>
+                            <p className='font-medium text-[17px] md:text-[40px] text-center'>Power.uz  - halollik foydadan ustun !</p>
                         </div>
                         <div
                             data-aos="fade-up"
@@ -43,7 +43,7 @@ export default function AboutUs() {
                             data-aos-duration="1400"
                             className='w-full h-[200px] bg-[#D8DBFB] rounded-[40px] p-8 flex flex-col items-start'>
                             <img src={medal} alt="medal" className="mb-3" />
-                            <p className='font-medium text-[16px] md:text-[20px]'>Farobiy IT Academy - bu illyustratsiya, dizayn, fotografiya, video, freelancing va boshqa mavzularda ijodiy va qiziquvchan.</p>
+                            <p className='font-medium text-[16px] md:text-[20px]'>Power.uz: Arzon narxlar, tez yetkazib berish, keng assortiment, sifat kafolati, mijozlarga qulaylik, zamonaviy xizmat, samarali echimlar, barqaror taraqqiyot.</p>
                         </div>
                     </div>
                 </div>

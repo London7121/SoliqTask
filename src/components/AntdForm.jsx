@@ -7,7 +7,7 @@ export default function AntdForm() {
     return (
         <div className="max-w-[600px] mx-auto">
             <Form layout="vertical" className='py-10 mx-5 flex flex-col items-start justify-between gap-5'>
-                <Form.Item className='w-full'>
+                {/* <Form.Item className='w-full'>
                     <Input
                         style={{ fontSize: "18px" }}
                         required
@@ -32,13 +32,13 @@ export default function AntdForm() {
                             className="w-full"
                         />
                     </Form.Item>
-                </div>
+                </div> */}
                 <Form.Item>
                     <Button
                         htmlType="submit"
-                        className="w-full md:w-[130px] h-[50px] rounded-[20px] font-medium text-[16px] text-white bg-[#2189FF]"
+                        className="w-full md:w-[180px] h-[60px] rounded-[20px] font-medium text-[16px] text-white bg-[#2189FF]"
                     >
-                        Yuborish
+                            <a href="https://t.me/Akmal_Bobomurodov">Buyurtma berish</a>
                     </Button>
                 </Form.Item>
             </Form>
