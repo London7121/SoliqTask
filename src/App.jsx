@@ -23,9 +23,6 @@ const Kitoblar = lazy(() => import('./pages/Kitoblar'));
 const Cart = lazy(() => import('./pages/Cart'));
 const ProductModal = lazy(() => import('./components/ProductModal'));
 
-// Assets
-import logo from '../src/assets/icons/Power .png';
-import book from '../src/assets/icons/book.png';
 import start from '../src/assets/icons/star.png';
 
 const Banner = React.memo(() => (
