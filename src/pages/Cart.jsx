@@ -70,15 +70,14 @@ const Cart = () => {
     try {
       setOrderStatus("Buyurtma yuborilmoqda...");
       
-      const response = await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+      const response = await fetch('/api/telegram', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
           chat_id: chatId,
-          text: messageText,
-          parse_mode: 'MarkdownV2'
+          text: messageText
         })
       });
 
