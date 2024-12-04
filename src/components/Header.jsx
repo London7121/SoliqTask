@@ -5,8 +5,7 @@ import { RxHamburgerMenu } from "react-icons/rx";
 import { IoMdClose } from "react-icons/io";
 import { useCart } from '../context/CartContext';
 import AntSelect from './AntSelect';
-import logo from '../assets/icons/Power .png';
-import book from '../assets/icons/book.png';
+import logo from '../assets/icons/P.png';
 
 const Header = ({ isOpen, toggleMenu }) => {
   const { cartItems } = useCart();
@@ -104,7 +103,6 @@ const Header = ({ isOpen, toggleMenu }) => {
           className="text-[15px] cursor-pointer font-medium w-[140px] h-[45px] rounded-[16px] bg-[#EAF4FF] duration-100 hover:bg-[#e0ecf8] text-[#2189FF] flex items-center justify-center gap-3 px-2 ml-2"
         >
           Kategoriyalar
-          <img className='w-[180px]' src={book} alt="book" loading="lazy" />
         </ScrollLink>
         <button
           onClick={toggleMenu}
