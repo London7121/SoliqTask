@@ -17,28 +17,51 @@ import icon6 from '../assets/icons/Dasturlash.png'
 import icon7 from '../assets/icons/Dasturlash.png'
 
 
-const kitoblar = [
-    {
-        id: 1,
-        title: "Savdogarlar ustozi(1-qism)",
-        job_name: "89.000 so'm",
-        img: "https://grafus.uz/backend/web/uploads/product/997353007.jpg",
-        icon: icon7
-    },
-    {
-        id: 2,
-        title: "Izlash kitobi",
-        job_name: "109.000 so'm",
-        img: "https://grafus.uz/backend/web/uploads/product/109996007.jpg",
-        icon: icon7
-    },
-    {
-        id: 3,
-        title: "Duo taqdirni o'zgartiradi",
-        job_name: "79.000 so'm",
-        img: "https://grafus.uz/backend/web/uploads/product/143502007.jpg",
-        icon: icon7
-    },
-];
-
-export default kitoblar;
+export const kitoblar = {
+    uz: [
+        {
+            id: 1,
+            title: "Savdogarlar ustozi (1-qism)",
+            job_name: "89.000 so'm",
+            img: "https://grafus.uz/backend/web/uploads/product/997353007.jpg",
+            icon: icon7
+        },
+        {
+            id: 2,
+            title: "Izlash kitobi",
+            job_name: "109.000 so'm",
+            img: "https://grafus.uz/backend/web/uploads/product/109996007.jpg",
+            icon: icon7
+        },
+        {
+            id: 3,
+            title: "Duo taqdirni o'zgartiradi",
+            job_name: "79.000 so'm",
+            img: "https://grafus.uz/backend/web/uploads/product/143502007.jpg",
+            icon: icon7
+        }
+    ],
+    ru: [
+        {
+            id: 1,
+            title: "Учитель торговцев (Часть 1)",
+            job_name: "89.000 сум",
+            img: "https://grafus.uz/backend/web/uploads/product/997353007.jpg",
+            icon: icon7
+        },
+        {
+            id: 2,
+            title: "Книга поиска",
+            job_name: "109.000 сум",
+            img: "https://grafus.uz/backend/web/uploads/product/109996007.jpg",
+            icon: icon7
+        },
+        {
+            id: 3,
+            title: "Молитва меняет судьбу",
+            job_name: "79.000 сум",
+            img: "https://grafus.uz/backend/web/uploads/product/143502007.jpg",
+            icon: icon7
+        }
+    ]
+};

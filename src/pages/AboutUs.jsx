@@ -12,38 +12,44 @@ export default function AboutUs() {
     }, []);
 
     return (
-        <div>
-            <div id="aboutUs" className="my-10 h-auto py-10">
-                <p className='text-[#0B2441] text-[28px] font-bold text-center lg:text-start'>Biz haqimizda</p>
-                <div className='mt-8 text-[#0B2441] grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-[1300px] mx-auto'>
-                    <div className='flex flex-col items-center justify-start gap-4'>
-                        <div
-                            data-aos="fade-up"
-                            data-aos-duration="1000"
-                            className='w-full h-[220px] bg-[#F1E2C1] rounded-[40px] p-8 flex flex-col items-start'>
-                            <img src={like} alt="like" className="mb-3" />
-                            <p className='font-medium text-[17px] md:text-[40px] text-center'>Power.uz  - halollik foydadan ustun !</p>
-                        </div>
-                        <div
-                            data-aos="fade-up"
-                            data-aos-duration="1300"
-                            className='w-full h-[400px] rounded-[40px] overflow-hidden'>
-                            <img src={img7} alt="img7" className="w-full h-full object-cover" />
+        <div id="about" className="min-h-screen py-16 px-4">
+            <div className="max-w-6xl mx-auto">
+                <h2 className="text-3xl font-bold text-center mb-12">Biz haqimizda</h2>
+                
+                <div className="grid md:grid-cols-2 gap-8">
+                    <div className="space-y-6">
+                        <h3 className="text-xl font-semibold text-[#2189FF]">Power.uz - Sizning ishonchli hamkoringiz</h3>
+                        <p className="text-gray-600">
+                            Power.uz - bu O'zbekistonning eng yirik va ishonchli onlayn do'konlaridan biri. Biz 2023-yildan beri mijozlarimizga yuqori sifatli mahsulotlar va ajoyib xizmat ko'rsatib kelmoqdamiz.
+                        </p>
+                        
+                        <div className="space-y-4">
+                            <h4 className="font-semibold">Bizning afzalliklarimiz:</h4>
+                            <ul className="list-disc pl-5 space-y-2 text-gray-600">
+                                <li>Keng assortimentdagi mahsulotlar</li>
+                                <li>Hamyonbop narxlar</li>
+                                <li>Tez va ishonchli yetkazib berish</li>
+                                <li>Professional mijozlar xizmati</li>
+                                <li>Sifat kafolati</li>
+                            </ul>
                         </div>
                     </div>
-                    <div className='flex flex-col items-center justify-start gap-4'>
-                        <div
-                            data-aos="fade-up"
-                            data-aos-duration="1350"
-                            className='w-full h-[420px] rounded-[40px] overflow-hidden'>
-                            <img src={img6} alt="img7" className="w-full h-full object-cover" />
-                        </div>
-                        <div
-                            data-aos="fade-up"
-                            data-aos-duration="1400"
-                            className='w-full h-[200px] bg-[#D8DBFB] rounded-[40px] p-8 flex flex-col items-start'>
-                            <img src={medal} alt="medal" className="mb-3" />
-                            <p className='font-medium text-[16px] md:text-[20px]'>Power.uz: Arzon narxlar, tez yetkazib berish, keng assortiment, sifat kafolati, mijozlarga qulaylik, zamonaviy xizmat, samarali echimlar, barqaror taraqqiyot.</p>
+                    
+                    <div className="space-y-6">
+                        <h3 className="text-xl font-semibold text-[#2189FF]">Bizning maqsadimiz</h3>
+                        <p className="text-gray-600">
+                            Bizning asosiy maqsadimiz - mijozlarimizga eng sifatli mahsulotlarni qulay narxlarda taqdim etish va mukammal xarid tajribasini yaratishdir.
+                        </p>
+                        
+                        <div className="space-y-4">
+                            <h4 className="font-semibold">Bizning qadriyatlarimiz:</h4>
+                            <ul className="list-disc pl-5 space-y-2 text-gray-600">
+                                <li>Sifat va ishonchlilik</li>
+                                <li>Mijozlar manfaati</li>
+                                <li>Doimiy rivojlanish</li>
+                                <li>Innovatsion yechimlar</li>
+                                <li>Ijtimoiy mas'uliyat</li>
+                            </ul>
                         </div>
                     </div>
                 </div>

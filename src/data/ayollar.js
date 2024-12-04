@@ -17,42 +17,51 @@ import icon6 from '../assets/icons/Dasturlash.png'
 import icon7 from '../assets/icons/Dasturlash.png'
 
 
-const ayollar = [
-    {
-        id: 1,
-        title: "Al-husna uzuk va sepochkasi(ibodati islomiya)",
-        job_name: "99.000 so'm",
-        img: "https://grafus.uz/backend/web/uploads/product/100390007.jpg",
-        icon: icon2
-    },
-    {
-        id: 2,
-        title: "Qanotli yurak",
-        job_name: "69.000 so'm",
-        img: "https://grafus.uz/backend/web/uploads/product/303790007.jpg",
-        icon: icon4
-    },
-    {
-        id: 3,
-        title: "Drakon krem",
-        job_name: "69.000 so'm",
-        img: "https://grafus.uz/backend/web/uploads/product/832248007.jpg",
-        icon: icon5
-    },
-    {
-        id: 4,
-        title: "Feramon atir",
-        job_name: "99.000 so'm",
-        img: "https://alijahon.uz/media/product/IMG_4771.jpeg",
-        icon: icon7
-    },
-    {
-        id: 5,
-        title: "Chig'anoq ichida durli sepochka",
-        job_name: "115.000 so'm",
-        img: "https://grafus.uz/backend/web/uploads/product/783733007.jpg",
-        icon: icon7
-    },
-];
-
-export default ayollar;
+export const ayollar = {
+    uz: [
+        {
+            id: 1,
+            title: "Ayollar uchun sumka",
+            job_name: "89.000 so'm",
+            img: "https://grafus.uz/backend/web/uploads/product/473431007.jpg",
+            icon: icon1
+        },
+        {
+            id: 2,
+            title: "Ayollar uchun atir",
+            job_name: "99.000 so'm",
+            img: "https://grafus.uz/backend/web/uploads/product/798514007.jpg",
+            icon: icon3
+        },
+        {
+            id: 3,
+            title: "Ayollar uchun taqinchoq",
+            job_name: "99.000 so'm",
+            img: "https://alijahon.uz/media/product/IMG_4771.jpeg",
+            icon: icon7
+        }
+    ],
+    ru: [
+        {
+            id: 1,
+            title: "Сумка для женщин",
+            job_name: "89.000 сум",
+            img: "https://grafus.uz/backend/web/uploads/product/473431007.jpg",
+            icon: icon1
+        },
+        {
+            id: 2,
+            title: "Духи для женщин",
+            job_name: "99.000 сум",
+            img: "https://grafus.uz/backend/web/uploads/product/798514007.jpg",
+            icon: icon3
+        },
+        {
+            id: 3,
+            title: "Украшения для женщин",
+            job_name: "99.000 сум",
+            img: "https://alijahon.uz/media/product/IMG_4771.jpeg",
+            icon: icon7
+        }
+    ]
+};

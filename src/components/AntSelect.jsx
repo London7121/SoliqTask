@@ -1,17 +1,18 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Select, Space } from 'antd';
+import { useLanguage } from '../context/LanguageContext';
+
 export default function AntSelect() {
-    const [selectedLanguage, setSelectedLanguage] = useState('UZ');
+    const { language, setLanguage } = useLanguage();
 
     const handleChange = (value) => {
-        setSelectedLanguage(value);
-        console.log(`selected ${value}`);
+        setLanguage(value.toLowerCase());
     };
+
     return (
-        <Space
-            wrap>
+        <Space wrap>
             <Select
-                defaultValue={selectedLanguage}
+                defaultValue={language.toUpperCase()}
                 className="custom-select"
                 style={{
                     width: 60,

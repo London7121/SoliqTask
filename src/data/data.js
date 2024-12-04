@@ -17,7 +17,7 @@ import icon6 from '../assets/icons/Dasturlash.png'
 import icon7 from '../assets/icons/Dasturlash.png'
 
 
-const our_teachers = [
+export const our_teachers = [
     {
         id: 1,
         title: "Erkaklar uchun magnitli ichkiym",
@@ -124,5 +124,3 @@ const our_teachers = [
         icon: icon7
     },
 ];
-
-export default our_teachers;
