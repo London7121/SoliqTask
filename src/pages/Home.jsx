@@ -10,7 +10,7 @@ import ProductModal from '../components/ProductModal';
 
 const Home = () => {
   const { products, categories, getLocalizedName } = useProducts();
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const { addToCart } = useCart();
   const navigate = useNavigate();
   const [selectedCategory, setSelectedCategory] = useState('all');
@@ -60,6 +60,16 @@ const Home = () => {
 
   const handleProductDetail = (productId) => {
     navigate(`/product/${productId}`);
+  };
+
+  const renderProductName = (product) => {
+    // Agar product.name ob'ekt bo'lsa, tilga qarab qiymatni olamiz
+    if (typeof product.name === 'object') {
+      return product.name[language] || product.name.uz || product.name.ru || '';
+    }
+    
+    // Agar oddiy satr bo'lsa, uni qaytaramiz
+    return String(product.name || '');
   };
 
   const CategoryPanel = () => (
@@ -260,7 +270,7 @@ const Home = () => {
                   )}
                   <img
                     src={product.images?.[currentImageIndex[product.id] || 0] || product.image}
-                    alt={getLocalizedName(product)}
+                    alt={renderProductName(product)}
                     className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-110"
                     loading="lazy"
                   />
@@ -290,7 +300,7 @@ const Home = () => {
                   onClick={() => handleProductDetail(product.id)}
                 >
                   <h3 className="text-lg font-semibold mb-2 line-clamp-2 text-[#0B2441]">
-                    {getLocalizedName(product)}
+                    {renderProductName(product)}
                   </h3>
                   <div className="flex items-center justify-between">
                     <span className="text-[#2189FF] font-bold">

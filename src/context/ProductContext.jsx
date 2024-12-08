@@ -109,10 +109,22 @@ export const ProductProvider = ({ children }) => {
 
   // Til bo'yicha nom olish funksiyasi
   const getLocalizedName = (item) => {
-    if (typeof item.name === 'object') {
-      return item.name[language] || item.name['uz'] || '';
+    // Agar item undefined bo'lsa, bo'sh satr qaytaramiz
+    if (!item) return '';
+
+    // Agar name oddiy satr bo'lsa, uni ob'ektga aylantiramiz
+    if (typeof item.name !== 'object') {
+      return {
+        uz: String(item.name || ''),
+        ru: String(item.name || '')
+      };
     }
-    return item.name || '';
+
+    // Agar name ob'ekt bo'lsa, uni tekshiramiz
+    return {
+      uz: item.name.uz || item.name.ru || '',
+      ru: item.name.ru || item.name.uz || ''
+    };
   };
 
   const addProduct = (newProduct) => {

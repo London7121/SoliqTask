@@ -1,14 +1,37 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
+import { useLanguage } from './LanguageContext';
 
 const CartContext = createContext();
 
 const MAX_CART_ITEMS = 20; // Maksimal savatga qo'shiladigan mahsulotlar soni
 
+// Mahsulot nomini render qilish funksiyasi
+const renderProductName = (product, currentLanguage = 'uz') => {
+  // Agar product undefined bo'lsa, bo'sh satr qaytaramiz
+  if (!product) return '';
+
+  // Agar name ob'ekt bo'lsa, tilga qarab qiymatni olamiz
+  if (typeof product.name === 'object') {
+    return product.name[currentLanguage] || 
+           product.name.uz || 
+           product.name.ru || 
+           '';
+  }
+  
+  // Agar oddiy satr bo'lsa, uni qaytaramiz
+  return String(product.name || '');
+};
+
 export const CartProvider = ({ children }) => {
+  const { language } = useLanguage();
+  
   const [cartItems, setCartItems] = useState(() => {
     try {
       const savedCart = localStorage.getItem('cartItems');
-      return savedCart ? JSON.parse(savedCart) : [];
+      return savedCart ? JSON.parse(savedCart).map(item => ({
+        ...item,
+        name: renderProductName(item, language)
+      })) : [];
     } catch (error) {
       console.error("localStorage dan ma'lumot o'qishda xatolik:", error);
       return [];
@@ -56,13 +79,20 @@ export const CartProvider = ({ children }) => {
         );
       }
       
+      // Yangi mahsulotni tilga moslab qo'shish
+      const newItem = {
+        ...item,
+        name: renderProductName(item, language),
+        quantity: 1
+      };
+      
       // Agar savatda bo'sh o'rin bo'lsa, yangi mahsulotni qo'shish
       if (prevItems.length < MAX_CART_ITEMS) {
-        return [...prevItems, { ...item, quantity: 1 }];
+        return [...prevItems, newItem];
       }
       
       // Agar savat to'la bo'lsa, eng avvalgi mahsulotni o'chirib, yangi mahsulotni qo'shish
-      return [...prevItems.slice(1), { ...item, quantity: 1 }];
+      return [...prevItems.slice(1), newItem];
     });
   };
 

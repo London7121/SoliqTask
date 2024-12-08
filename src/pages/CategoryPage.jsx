@@ -12,7 +12,7 @@ import { products } from '../data/products'; // Mahsulotlar ro'yxatini import qi
 const CategoryPage = () => {
   const { categoryId } = useParams();
   const { categories, products } = useProducts(); // ProductContext dan mahsulotlarni olish
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const { addToCart } = useCart();
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -59,6 +59,24 @@ const CategoryPage = () => {
     const currentIndex = currentImageIndex[productId] || 0;
     const prevIndex = currentIndex === 0 ? (product.images?.length - 1 || 0) : currentIndex - 1;
     setCurrentImageIndex(prev => ({ ...prev, [productId]: prevIndex }));
+  };
+
+  const getLocalizedName = (product) => {
+    return {
+      uz: product.nameUz,
+      ru: product.nameRu,
+      en: product.nameEn,
+    };
+  };
+
+  const renderProductName = (product) => {
+    // Agar product.name ob'ekt bo'lsa, tilga qarab qiymatni olamiz
+    if (typeof product.name === 'object') {
+      return product.name[language] || product.name.uz || product.name.ru || '';
+    }
+    
+    // Agar oddiy satr bo'lsa, uni qaytaramiz
+    return String(product.name || '');
   };
 
   if (!categoryProducts.length) {
@@ -141,7 +159,7 @@ const CategoryPage = () => {
                 className="p-4"
                 onClick={() => handleProductClick(product)}
               >
-                <h3 className="text-lg font-semibold mb-2 line-clamp-2 text-[#0B2441]">{product.name}</h3>
+                <h3 className="text-lg font-semibold mb-2 line-clamp-2 text-[#0B2441]">{renderProductName(product)}</h3>
                 <div className="flex items-center justify-between">
                   <span className="text-[#2189FF] font-bold">{product.price.toLocaleString()} so'm</span>
                   <button 
