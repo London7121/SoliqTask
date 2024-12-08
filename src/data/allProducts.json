@@ -1,0 +1,62 @@
+{
+  "erkaklar": [
+    {
+      "id": "erkak1",
+      "name": {
+        "uz": "Erkaklar kiyimi 1",
+        "ru": "Мужская одежда 1"
+      },
+      "price": 50000,
+      "image": "/images/erkaklar/erkak1.jpg",
+      "categoryId": "erkaklar"
+    }
+  ],
+  "ayollar": [
+    {
+      "id": "ayol1",
+      "name": {
+        "uz": "Ayollar kiyimi 1",
+        "ru": "Женская одежда 1"
+      },
+      "price": 60000,
+      "image": "/images/ayollar/ayol1.jpg",
+      "categoryId": "ayollar"
+    }
+  ],
+  "bolalar": [
+    {
+      "id": "bola1",
+      "name": {
+        "uz": "Bolalar kiyimi 1",
+        "ru": "Детская одежда 1"
+      },
+      "price": 40000,
+      "image": "/images/bolalar/bola1.jpg",
+      "categoryId": "bolalar"
+    }
+  ],
+  "kitoblar": [
+    {
+      "id": "kitob1",
+      "name": {
+        "uz": "Kitob 1",
+        "ru": "Книга 1"
+      },
+      "price": 25000,
+      "image": "/images/kitoblar/kitob1.jpg",
+      "categoryId": "kitoblar"
+    }
+  ],
+  "maishiyTexnika": [
+    {
+      "id": "texnika1",
+      "name": {
+        "uz": "Maishiy texnika 1",
+        "ru": "Бытовая техника 1"
+      },
+      "price": 150000,
+      "image": "/images/maishiyTexnika/texnika1.jpg",
+      "categoryId": "maishiyTexnika"
+    }
+  ]
+}

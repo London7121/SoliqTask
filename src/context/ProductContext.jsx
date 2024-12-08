@@ -1,9 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import { erkaklar } from '../data/erkaklar';
-import { ayollar } from '../data/ayollar';
-import { bolalar } from '../data/bolalar';
-import { kitoblar } from '../data/kitoblar';
-import { maishiy_tex } from '../data/maishiyTex';
+import allProductsData from '../data/allProducts.json';
 
 // Kategoriyalarni ma'lumotlar asosida shakllantirish
 const defaultCategories = [
@@ -36,39 +32,11 @@ const defaultCategories = [
 
 // Mahsulotlarni ma'lumotlar asosida shakllantirish
 const getDefaultProducts = () => {
-  // Directly use category-specific data files
-  const allProducts = [
-    ...erkaklar.map(product => ({
-      ...product, 
-      categoryId: 'erkaklar', 
-      language: 'uz',
-      images: product.images || [product.image].filter(Boolean)
-    })),
-    ...ayollar.map(product => ({
-      ...product, 
-      categoryId: 'ayollar', 
-      language: 'uz',
-      images: product.images || [product.image].filter(Boolean)
-    })),
-    ...bolalar.map(product => ({
-      ...product, 
-      categoryId: 'bolalar', 
-      language: 'uz',
-      images: product.images || [product.image].filter(Boolean)
-    })),
-    ...kitoblar.map(product => ({
-      ...product, 
-      categoryId: 'kitoblar', 
-      language: 'uz',
-      images: product.images || [product.image].filter(Boolean)
-    })),
-    ...maishiy_tex.map(product => ({
-      ...product, 
-      categoryId: 'maishiyTexnika', 
-      language: 'uz',
-      images: product.images || [product.image].filter(Boolean)
-    }))
-  ];
+  const allProducts = Object.values(allProductsData).flat().map(product => ({
+    ...product,
+    language: 'uz',
+    images: [product.image].filter(Boolean)
+  }));
 
   return allProducts;
 };
