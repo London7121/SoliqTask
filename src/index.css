@@ -3,6 +3,16 @@
 @tailwind utilities;
 
 :root {
+  /* Light mode default colors */
+  --bg-primary: #ffffff;
+  --text-primary: #333333;
+  --accent-primary: #2189FF;
+
+  /* Dark mode colors */
+  --bg-dark: #121212;
+  --text-dark: #E0E0E0;
+  --accent-dark: #4D9FEC;
+
   --primary-color: #2189FF;
   --secondary-color: #0B2441;
   --background-color: #F4F7FA;
@@ -10,12 +20,19 @@
   --accent-color: #4CAF50;
 }
 
+/* Dark mode styles */
+.dark {
+  --bg-primary: var(--bg-dark);
+  --text-primary: var(--text-dark);
+  --accent-primary: var(--accent-dark);
+}
+
 body {
-  background-color: var(--background-color);
+  background-color: var(--bg-primary);
   overflow-x: hidden;
   padding-top: 120px; /* Adjusted to match header height */
-  color: var(--text-color);
-  transition: background-color 0.3s ease;
+  color: var(--text-primary);
+  transition: background-color 0.3s, color 0.3s;
 }
 
 .bg-primary {
@@ -84,4 +101,9 @@ body {
 }
 .textStyle{
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+/* Tema o'zgarishi uchun global animatsiyalar */
+* {
+  transition: background-color 0.3s, color 0.3s;
 }

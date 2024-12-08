@@ -1,6 +1,7 @@
 import React from 'react'
 import logo from '../assets/icons/Power .png'
-export default function Footer() {
+
+export const Footer = () => {
     return (
         <div>
             <footer className="p-4 bg-[#EAF4FF] sm:p-6 dark:bg-gray-800">

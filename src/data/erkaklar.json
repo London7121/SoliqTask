@@ -1,0 +1,26 @@
+{
+    "products": [
+        {
+            "id": "m1",
+            "name": "Erkaklar uchun klassik ko'ylak",
+            "price": 129000,
+            "categoryId": "erkaklar",
+            "images": [
+                "https://shoptextile.uz/image/cache/catalog/image/cache/catalog/product/ST0066/ST0066_1-1000x1000.webp",
+                "https://example.com/mens-shirt2.jpg"
+            ],
+            "description": "Yumshoq va stilli klassik ko'ylak"
+        },
+        {
+            "id": "m2", 
+            "name": "Erkaklar uchun sport shim",
+            "price": 179000,
+            "categoryId": "erkaklar",
+            "images": [
+                "https://example.com/mens-pants1.jpg",
+                "https://example.com/mens-pants2.jpg"
+            ],
+            "description": "Qulay va zamonaviy sport shimlari"
+        }
+    ]
+}

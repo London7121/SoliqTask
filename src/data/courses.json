@@ -1,0 +1,42 @@
+{
+    "products": [
+        {
+            "id": "cr1",
+            "name": {
+                "uz": "Web Dasturlash kursi",
+                "ru": "Курс по веб-разработке",
+                "en": "Web Development Course"
+            },
+            "price": 499000,
+            "categoryId": "courses",
+            "images": [
+                "https://example.com/web-dev-course1.jpg",
+                "https://example.com/web-dev-course2.jpg"
+            ],
+            "description": {
+                "uz": "Professional web dasturlash kursi",
+                "ru": "Профессиональный курс веб-разработки",
+                "en": "Professional web development course"
+            }
+        },
+        {
+            "id": "cr2", 
+            "name": {
+                "uz": "Dizayn kursi",
+                "ru": "Курс по дизайну",
+                "en": "Design Course"
+            },
+            "price": 399000,
+            "categoryId": "courses",
+            "images": [
+                "https://example.com/design-course1.jpg",
+                "https://example.com/design-course2.jpg"
+            ],
+            "description": {
+                "uz": "Professional grafik dizayn kursi",
+                "ru": "Профессиональный курс графического дизайна",
+                "en": "Professional graphic design course"
+            }
+        }
+    ]
+}

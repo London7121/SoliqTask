@@ -1,0 +1,26 @@
+{
+    "products": [
+        {
+            "id": "w1",
+            "name": "Ayollar uchun elegant ko'ylak",
+            "price": 159000,
+            "categoryId": "ayollar",
+            "images": [
+                "https://example.com/womens-blouse1.jpg",
+                "https://example.com/womens-blouse2.jpg"
+            ],
+            "description": "Zariflik va stil birlashgan elegant ko'ylak"
+        },
+        {
+            "id": "w2", 
+            "name": "Ayollar uchun yumshoq shim",
+            "price": 189000,
+            "categoryId": "ayollar",
+            "images": [
+                "https://example.com/womens-pants1.jpg",
+                "https://example.com/womens-pants2.jpg"
+            ],
+            "description": "Qulay va stilli ayollar shimlari"
+        }
+    ]
+}

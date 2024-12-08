@@ -1,0 +1,26 @@
+{
+    "products": [
+        {
+            "id": "w1",
+            "name": "Muzlatgich",
+            "price": 159000,
+            "categoryId": "maishiy_tex",
+            "images": [
+                "https://example.com/womens-blouse1.jpg",
+                "https://example.com/womens-blouse2.jpg"
+            ],
+            "description": "Zariflik va stil birlashgan elegant ko'ylak"
+        },
+        {
+            "id": "w2", 
+            "name": "stol stul koplekt",
+            "price": 189000,
+            "categoryId": "maishiy_tex",
+            "images": [
+                "https://example.com/womens-pants1.jpg",
+                "https://example.com/womens-pants2.jpg"
+            ],
+            "description": "Qulay va stilli ayollar shimlari"
+        }
+    ]
+}

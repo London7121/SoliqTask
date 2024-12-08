@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { FaArrowRight, FaArrowLeft, FaShoppingCart, FaEye } from "react-icons/fa";
-import { kitoblar } from '../data/kitoblar.js';
+import kitoblar from '../data/kitoblar.json';
 import { useLanguage } from '../context/LanguageContext';
 import { useCart } from '../context/CartContext';
 import ProductModal from '../components/ProductModal';
@@ -12,19 +12,17 @@ export default function Kitoblar() {
     const [currentImageIndex, setCurrentImageIndex] = useState({});
     const [selectedProduct, setSelectedProduct] = useState(null);
     const [isModalVisible, setIsModalVisible] = useState(false);
-    
+
     // Use the kitoblar array directly
-    const products = kitoblar;
-    console.log(products);
-    
+    const products = kitoblar.products;
 
     const handleAddToCart = (product) => {
         const formattedProduct = {
             ...product,
-            name: product.title,
-            price: parseInt(product.job_name.replace(/[^\d]/g, '')),
-            image: product.img,
-            description: product.title,
+            name: product.name,
+            price: product.price,
+            image: product.images[0],
+            description: product.description,
             features: [t('quality'), t('price'), t('delivery')]
         };
         
@@ -39,10 +37,10 @@ export default function Kitoblar() {
     const handleProductClick = (product) => {
         const formattedProduct = {
             ...product,
-            name: product.title,
-            price: parseInt(product.job_name.replace(/[^\d]/g, '')),
-            image: product.img,
-            description: product.title,
+            name: product.name,
+            price: product.price,
+            image: product.images[0],
+            description: product.description,
             features: [t('quality'), t('price'), t('delivery')]
         };
         
@@ -57,20 +55,22 @@ export default function Kitoblar() {
 
     const handleNextImage = (productId, e) => {
         e.stopPropagation();
+        const product = products.find(p => p.id === productId);
         const currentIndex = currentImageIndex[productId] || 0;
-        const nextIndex = (currentIndex + 1) % 1; // Kitoblar uchun faqat bitta rasm
+        const nextIndex = (currentIndex + 1) % (product.images?.length || 1);
         setCurrentImageIndex(prev => ({ ...prev, [productId]: nextIndex }));
     };
 
     const handlePrevImage = (productId, e) => {
         e.stopPropagation();
+        const product = products.find(p => p.id === productId);
         const currentIndex = currentImageIndex[productId] || 0;
-        const prevIndex = currentIndex === 0 ? 0 : currentIndex - 1;
+        const prevIndex = currentIndex === 0 ? (product.images?.length - 1 || 0) : currentIndex - 1;
         setCurrentImageIndex(prev => ({ ...prev, [productId]: prevIndex }));
     };
 
     return (
-        <div>
+        <div className="container mx-auto px-4 py-8">
             <div id="kitoblar" className="my-16 h-auto py-2">
                 <div data-aos="fade-up" className='flex flex-col lg:flex-row items-center justify-between gap-3'>
                     <div className='flex flex-col items-start gap-4'>
@@ -94,18 +94,34 @@ export default function Kitoblar() {
                             key={product.id}
                             className="bg-white rounded-lg shadow-md overflow-hidden cursor-pointer group relative transform transition-transform duration-300 hover:scale-105"
                         >
-                            <div 
+                            <div
                                 className="relative h-48 overflow-hidden"
                                 onClick={() => handleProductClick(product)}
                             >
+                                {product.images && product.images.length > 1 && (
+                                    <div className="absolute z-10 top-1/2 transform -translate-y-1/2 w-full flex justify-between px-2">
+                                        <button
+                                            onClick={(e) => handlePrevImage(product.id, e)}
+                                            className="bg-white/50 p-1 rounded-full"
+                                        >
+                                            <FaArrowLeft className="text-[#0B2441]" />
+                                        </button>
+                                        <button
+                                            onClick={(e) => handleNextImage(product.id, e)}
+                                            className="bg-white/50 p-1 rounded-full"
+                                        >
+                                            <FaArrowRight className="text-[#0B2441]" />
+                                        </button>
+                                    </div>
+                                )}
                                 <img
-                                    src={product.img}
-                                    alt={product.title}
+                                    src={product.images?.[currentImageIndex[product.id] || 0] || product.images[0]}
+                                    alt={product.name}
                                     className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
                                     loading="lazy"
                                 />
                                 <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-300 flex items-center justify-center space-x-4 opacity-0 group-hover:opacity-100">
-                                    <button 
+                                    <button
                                         onClick={(e) => {
                                             e.stopPropagation();
                                             handleProductClick(product);
@@ -114,7 +130,7 @@ export default function Kitoblar() {
                                     >
                                         <FaEye className="text-[#2189FF]" />
                                     </button>
-                                    <button 
+                                    <button
                                         onClick={(e) => {
                                             e.stopPropagation();
                                             handleAddToCart(product);
@@ -125,13 +141,13 @@ export default function Kitoblar() {
                                     </button>
                                 </div>
                             </div>
-                            <div 
+                            <div
                                 className="p-4"
                                 onClick={() => handleProductClick(product)}
                             >
-                                <h3 className="text-lg font-semibold mb-2 line-clamp-2 text-[#0B2441]">{product.title}</h3>
+                                <h3 className="text-lg font-semibold mb-2 line-clamp-2 text-[#0B2441]">{product.name}</h3>
                                 <div className="flex items-center justify-between">
-                                    <span className="text-[#2189FF] font-bold">{product.job_name}</span>
+                                    <span className="text-[#2189FF] font-bold">{product.price.toLocaleString()} so'm</span>
                                 </div>
                             </div>
                         </div>
@@ -139,10 +155,10 @@ export default function Kitoblar() {
                 </div>
 
                 {selectedProduct && (
-                    <ProductModal 
-                        isOpen={isModalVisible} 
-                        onClose={handleCloseModal} 
-                        product={selectedProduct} 
+                    <ProductModal
+                        isOpen={isModalVisible}
+                        onClose={handleCloseModal}
+                        product={selectedProduct}
                     />
                 )}
             </div>

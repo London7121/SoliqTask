@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-export default function ScrollToTopButton() {
+export const ScrollToTopButton = () => {
     const [isVisible, setIsVisible] = useState(false);
 
     useEffect(() => {
@@ -33,4 +33,4 @@ export default function ScrollToTopButton() {
             </button>
         )
     );
-}
+};

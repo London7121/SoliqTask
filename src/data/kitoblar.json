@@ -1,0 +1,26 @@
+{
+    "products": [
+        {
+            "id": "b1",
+            "name": "Motivatsiya kitobi 1",
+            "price": 59000,
+            "categoryId": "kitoblar",
+            "images": [
+                "https://example.com/motivation-book1.jpg",
+                "https://example.com/motivation-book2.jpg"
+            ],
+            "description": "Hayotda muvaffaqiyatga erishish uchun motivatsion kitob"
+        },
+        {
+            "id": "b2",
+            "name": "Psixologiya asoslari",
+            "price": 45000,
+            "categoryId": "kitoblar",
+            "images": [
+                "https://example.com/psychology-book1.jpg",
+                "https://example.com/psychology-book2.jpg"
+            ],
+            "description": "Psixologiyaning asosiy tushunchalarini o'rganish uchun qo'llanma"
+        }
+    ]
+}

@@ -1,0 +1,26 @@
+{
+    "products": [
+        {
+            "id": "c1",
+            "name": "Bolalar uchun sport ko'ylagi",
+            "price": 79000,
+            "categoryId": "bolalar",
+            "images": [
+                "https://example.com/kids-tshirt1.jpg",
+                "https://example.com/kids-tshirt2.jpg"
+            ],
+            "description": "Qulay va rang-barang bolalar sport ko'ylagi"
+        },
+        {
+            "id": "c2",
+            "name": "Bolalar uchun yozgi kepka",
+            "price": 45000,
+            "categoryId": "bolalar",
+            "images": [
+                "https://example.com/kids-cap1.jpg",
+                "https://example.com/kids-cap2.jpg"
+            ],
+            "description": "Yozgi kunlar uchun qulay va zamonaviy kepka"
+        }
+    ]
+}

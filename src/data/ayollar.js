@@ -16,27 +16,19 @@ import icon5 from '../assets/icons/Dizayn (1).png'
 import icon6 from '../assets/icons/Dasturlash.png'
 import icon7 from '../assets/icons/Dasturlash.png'
 
-
 export const ayollar = [
     {
-        id: 1,
-        title: "Ayollar uchun sumka",
-        job_name: "89.000 so'm",
-        img: "https://grafus.uz/backend/web/uploads/product/473431007.jpg",
-        icon: icon1
+        id: 'w1',
+        name: 'Chiroyli ko\'ylak',
+        price: 129000,
+        img: 'https://example.com/elegant-dress.jpg',
+        description: 'Zamonaviy va chiroyli ayollar ko\'ylagi'
     },
     {
-        id: 2,
-        title: "Ayollar uchun atir",
-        job_name: "99.000 so'm",
-        img: "https://grafus.uz/backend/web/uploads/product/798514007.jpg",
-        icon: icon3
-    },
-    {
-        id: 3,
-        title: "Ayollar uchun taqinchoq",
-        job_name: "99.000 so'm",
-        img: "https://alijahon.uz/media/product/IMG_4771.jpeg",
-        icon: icon7
+        id: 'w2',
+        name: 'Yumshoq sweatshort',
+        price: 89000,
+        img: 'https://example.com/soft-sweatshort.jpg',
+        description: 'Qulay va yumshoq ayollar sweatshort'
     }
 ];

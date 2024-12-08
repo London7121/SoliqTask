@@ -7,11 +7,10 @@ import ProductModal from '../components/ProductModal';
 import { useCart } from '../context/CartContext';
 import { notification } from 'antd';
 import { useNavigate } from 'react-router-dom';
-import { products } from '../data/products'; // Mahsulotlar ro'yxatini import qilish
 
 const CategoryPage = () => {
   const { categoryId } = useParams();
-  const { categories, products } = useProducts(); // ProductContext dan mahsulotlarni olish
+  const { categories, products, getLocalizedName } = useProducts();
   const { t, language } = useLanguage();
   const { addToCart } = useCart();
   const [selectedProduct, setSelectedProduct] = useState(null);
@@ -19,8 +18,12 @@ const CategoryPage = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState({});
   const navigate = useNavigate();
 
-  const category = categories.find(cat => cat.id === categoryId);
-  const categoryProducts = products.filter(product => product.categoryId === categoryId);
+  const category = categories.find(
+    cat => cat.id.toLowerCase() === categoryId.toLowerCase().replace('-', '_')
+  );
+  const categoryProducts = products.filter(
+    product => product.category.toLowerCase() === category?.name.toLowerCase()
+  );
 
   const handleProductClick = (product) => {
     setSelectedProduct(product);
@@ -40,7 +43,7 @@ const CategoryPage = () => {
     addToCart(product);
     notification.success({
       message: t('added_to_cart_title'),
-      description: `${product.name} ${t('added_to_cart_desc')}`,
+      description: `${getLocalizedName(product)} ${t('added_to_cart_desc')}`,
       placement: 'topRight',
     });
   };
@@ -61,24 +64,6 @@ const CategoryPage = () => {
     setCurrentImageIndex(prev => ({ ...prev, [productId]: prevIndex }));
   };
 
-  const getLocalizedName = (product) => {
-    return {
-      uz: product.nameUz,
-      ru: product.nameRu,
-      en: product.nameEn,
-    };
-  };
-
-  const renderProductName = (product) => {
-    // Agar product.name ob'ekt bo'lsa, tilga qarab qiymatni olamiz
-    if (typeof product.name === 'object') {
-      return product.name[language] || product.name.uz || product.name.ru || '';
-    }
-    
-    // Agar oddiy satr bo'lsa, uni qaytaramiz
-    return String(product.name || '');
-  };
-
   if (!categoryProducts.length) {
     return <div className="text-center py-8">{t('category_not_found')}</div>;
   }
@@ -88,7 +73,7 @@ const CategoryPage = () => {
       <div className="my-16 h-auto py-2">
         <div data-aos="fade-up" className='flex flex-col lg:flex-row items-center justify-between gap-3'>
           <div className='flex flex-col items-start gap-4'>
-            <p className='text-[28px] font-bold text-[#0B2441]'>{categoryId}</p>
+            <p className='text-[28px] font-bold text-[#0B2441]'>{category?.name?.[language] || categoryId}</p>
             <p className='text-[16px] font-normal text-[#64748B]'>{t('all_products')}</p>
           </div>
           <div className='flex items-center gap-3'>
@@ -130,7 +115,7 @@ const CategoryPage = () => {
                 )}
                 <img
                   src={product.images?.[currentImageIndex[product.id] || 0] || product.image}
-                  alt={product.name}
+                  alt={getLocalizedName(product)}
                   className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
                   loading="lazy"
                 />
@@ -159,7 +144,7 @@ const CategoryPage = () => {
                 className="p-4"
                 onClick={() => handleProductClick(product)}
               >
-                <h3 className="text-lg font-semibold mb-2 line-clamp-2 text-[#0B2441]">{renderProductName(product)}</h3>
+                <h3 className="text-lg font-semibold mb-2 line-clamp-2 text-[#0B2441]">{getLocalizedName(product)}</h3>
                 <div className="flex items-center justify-between">
                   <span className="text-[#2189FF] font-bold">{product.price.toLocaleString()} so'm</span>
                   <button 

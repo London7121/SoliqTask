@@ -4,28 +4,19 @@ import { Button, Typography, Space, Divider, Image } from 'antd';
 import { ShoppingCartOutlined, HeartOutlined } from '@ant-design/icons';
 import { useCart } from '../context/CartContext';
 import { useProducts } from '../context/ProductContext';
-import { useLanguage } from '../context/LanguageContext';
 
 const { Title, Paragraph, Text } = Typography;
 
 const ProductDetailPage = () => {
   const { productId } = useParams();
   const { addToCart } = useCart();
-  const { products } = useProducts();
-  const { currentLanguage } = useLanguage();
+  const { getProductById } = useProducts();
   const [product, setProduct] = useState(null);
 
   useEffect(() => {
-    const foundProduct = products.find(p => p.id === productId);
+    const foundProduct = getProductById(productId);
     setProduct(foundProduct);
-  }, [productId, products]);
-
-  const renderMultilingualText = (textObj) => {
-    if (typeof textObj === 'object' && textObj[currentLanguage]) {
-      return textObj[currentLanguage];
-    }
-    return textObj;
-  };
+  }, [productId, getProductById]);
 
   if (!product) {
     return (
@@ -48,72 +39,61 @@ const ProductDetailPage = () => {
       <div className="grid md:grid-cols-2 gap-8">
         {/* Mahsulot rasmlari */}
         <div>
-          {product.images && product.images.length > 0 ? (
-            <div className="grid grid-cols-1 gap-4">
-              <Image 
-                src={product.images[0]} 
-                alt={renderMultilingualText(product.name)} 
-                className="w-full h-96 object-cover rounded-lg"
+          {product.images || product.img ? (
+            <div className="flex itcems-center juctify-center gap-2  rounded-lg">
+              <Image
+                src={product.img || product.images[0]}
+                alt={product.name}
+                className=" object-cover shadow rounded-lg"
               />
-              {product.images.slice(1).map((image, index) => (
-                <Image 
-                  key={index} 
-                  src={image} 
-                  alt={`${renderMultilingualText(product.name)} - ${index + 2}`} 
-                  className="w-full h-48 object-cover rounded-lg"
-                />
-              ))}
             </div>
           ) : (
             <div className="w-full h-96 bg-gray-200 flex items-center justify-center rounded-lg">
-              <Text>Rasm mavjud emas</Text>
+              <Image
+                src="https://via.placeholder.com/300x300.png?text=No+Image"
+                alt={product.name}
+                className=" object-cover shadow rounded-lg"
+              />
             </div>
           )}
         </div>
 
         {/* Mahsulot ma'lumotlari */}
         <div>
-          <Title level={2}>{renderMultilingualText(product.name)}</Title>
-          <Text strong className="text-2xl text-[#2189FF]">
-            {product.price ? `${product.price.toLocaleString()} so'm` : 'Narx ko\'rsatilmagan'}
-          </Text>
+          <h1 className="text-3xl font-bold text-[#0B2441] dark:text-white">{product.title}</h1>
+          <div className="flex items-center space-x-4">
+            <span className="text-2xl font-bold text-[#2189FF] dark:text-white">
+              {product.price ? `${product.price} so'm` : "Narx ko'rsatilmagan"}
+            </span>
+
+          </div>
 
           <Divider />
 
-          <Paragraph>{renderMultilingualText(product.description) || 'Mahsulot haqida batafsil ma\'lumot yo\'q'}</Paragraph>
-
-          {product.features && product.features.length > 0 && (
-            <>
-              <Title level={4}>Xususiyatlari:</Title>
-              <ul className="list-disc pl-5">
-                {product.features.map((feature, index) => (
-                  <li key={index}>{renderMultilingualText(feature)}</li>
-                ))}
-              </ul>
-            </>
-          )}
+          <Paragraph className="dark:text-gray-300">
+            {product.title || product.description || 'Mahsulot haqida batafsil ma\'lumot yo\'q'}
+          </Paragraph>
 
           <Divider />
 
           <Space>
-            <Button 
-              type="primary" 
-              icon={<ShoppingCartOutlined />} 
-              size="large"
+            <Button
+              type="primary"
+              icon={<ShoppingCartOutlined />}
               onClick={handleAddToCart}
             >
               Savatga qo'shish
             </Button>
-            <Button 
-              icon={<HeartOutlined />} 
-              size="large"
+            <Button
+              icon={<HeartOutlined />}
+              className="text-red-500"
             >
               Sevimlilar
             </Button>
           </Space>
         </div>
       </div>
-    </div>
+    </div >
   );
 };
 

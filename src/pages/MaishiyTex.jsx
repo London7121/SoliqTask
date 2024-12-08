@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { FaArrowRight, FaArrowLeft, FaShoppingCart, FaEye } from "react-icons/fa";
-import maishiy_tex from '../data/maishiyTex';
+import maishiy_tex from '../data/maishiy_tex.json';
 import { useLanguage } from '../context/LanguageContext';
 import { useCart } from '../context/CartContext';
 import ProductModal from '../components/ProductModal';

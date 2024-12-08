@@ -1,33 +1,50 @@
 import React, { useState } from 'react';
 import { Row, Col, Button, Drawer, Badge, notification } from 'antd';
 import { FaArrowLeft, FaArrowRight, FaEye, FaShoppingCart } from 'react-icons/fa';
-import { useProducts } from '../context/ProductContext';
 import { useLanguage } from '../context/LanguageContext';
 import { useCart } from '../context/CartContext';
 import ProductModal from '../components/ProductModal';
+// import { Faqat } from '../components';
+import ayollar from '../data/ayollar.json';
 
 const Ayollar = ({ onProductClick }) => {
-  const { products } = useProducts();
   const { t } = useLanguage();
   const { addToCart } = useCart();
   const [currentImageIndex, setCurrentImageIndex] = useState({});
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [isModalVisible, setIsModalVisible] = useState(false);
 
-  // Faqat ayollar kategoriyasidagi mahsulotlarni filtrlash
-  const ayollarProducts = products.filter(product => product.categoryId === 'AYOLLAR_KATEGORIYASI');
+  const products = ayollar.products;
 
   const handleAddToCart = (product) => {
-    addToCart(product);
+    const formattedProduct = {
+      ...product,
+      name: product.name,
+      price: product.price,
+      image: product.images,
+      description: product.description,
+      features: [t('quality'), t('price'), t('delivery')]
+    };
+    
+    addToCart(formattedProduct);
     notification.success({
       message: t('added_to_cart_title'),
-      description: `${product.name} ${t('added_to_cart_desc')}`,
+      description: `${formattedProduct.name} ${t('added_to_cart_desc')}`,
       placement: 'topRight',
     });
   };
 
   const handleProductClick = (product) => {
-    setSelectedProduct(product);
+    const formattedProduct = {
+      ...product,
+      name: product.name,
+      price: product.price,
+      image: product.images,
+      description: product.description,
+      features: [t('quality'), t('price'), t('delivery')]
+    };
+    
+    setSelectedProduct(formattedProduct);
     setIsModalVisible(true);
   };
 
@@ -38,7 +55,7 @@ const Ayollar = ({ onProductClick }) => {
 
   const handleNextImage = (productId, e) => {
     e.stopPropagation();
-    const product = ayollarProducts.find(p => p.id === productId);
+    const product = products.find(p => p.id === productId);
     const currentIndex = currentImageIndex[productId] || 0;
     const nextIndex = (currentIndex + 1) % (product.images?.length || 1);
     setCurrentImageIndex(prev => ({ ...prev, [productId]: nextIndex }));
@@ -46,7 +63,7 @@ const Ayollar = ({ onProductClick }) => {
 
   const handlePrevImage = (productId, e) => {
     e.stopPropagation();
-    const product = ayollarProducts.find(p => p.id === productId);
+    const product = products.find(p => p.id === productId);
     const currentIndex = currentImageIndex[productId] || 0;
     const prevIndex = currentIndex === 0 ? (product.images?.length - 1 || 0) : currentIndex - 1;
     setCurrentImageIndex(prev => ({ ...prev, [productId]: prevIndex }));
@@ -57,7 +74,7 @@ const Ayollar = ({ onProductClick }) => {
       <div className="my-16 h-auto py-2">
         <div data-aos="fade-up" className='flex flex-col lg:flex-row items-center justify-between gap-3'>
           <div className='flex flex-col items-start gap-4'>
-            <p className='text-[28px] font-bold text-[#0B2441]'>{t('women_category')}</p>
+            <p className='text-[28px] font-bold text-[#0B2441]'>Ayollar uchun</p>
             <p className='text-[16px] font-normal text-[#64748B]'>{t('all_products')}</p>
           </div>
           <div className='flex items-center gap-3'>
@@ -70,13 +87,13 @@ const Ayollar = ({ onProductClick }) => {
           </div>
         </div>
 
-        {ayollarProducts.length === 0 ? (
+        {products.length === 0 ? (
           <div className="text-center py-8">
             <p className="text-xl text-gray-500">{t('no_products_in_category')}</p>
           </div>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mt-8">
-            {ayollarProducts.map((product) => (
+            {products.map((product) => (
               <div
                 key={product.id}
                 className="bg-white rounded-lg shadow-md overflow-hidden cursor-pointer group relative transform transition-transform duration-300 hover:scale-105"
@@ -102,7 +119,7 @@ const Ayollar = ({ onProductClick }) => {
                     </div>
                   )}
                   <img
-                    src={product.images?.[currentImageIndex[product.id] || 0] || product.image}
+                    src={product.images?.[currentImageIndex[product.id] || 0] || product.images[0]}
                     alt={product.name}
                     className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
                     loading="lazy"

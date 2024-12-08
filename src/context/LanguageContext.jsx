@@ -12,6 +12,7 @@ const translations = {
     enterPhone: 'Telefon raqamingizni kiriting',
     enterAddress: 'Manzilingizni kiriting',
     total: 'Jami',
+    search: 'qidirish',
     placeOrder: 'Buyurtma berish',
     men: 'Erkaklar',
     women: 'Ayollar',

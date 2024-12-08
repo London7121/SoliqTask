@@ -9,6 +9,13 @@ const CategoryMenu = () => {
   const { categories } = useProducts();
   const { t, currentLanguage } = useLanguage();
   const [isHovered, setIsHovered] = useState(false);
+  const [drawerVisible, setDrawerVisible] = useState(false);
+
+  const handleCategoryClick = (categoryPath) => {
+    navigate(categoryPath);
+    setIsHovered(false);
+    setDrawerVisible(false);
+  };
 
   const getCategoryName = (category) => {
     if (typeof category.name === 'object' && category.name[currentLanguage]) {
@@ -21,12 +28,9 @@ const CategoryMenu = () => {
     key: category.id,
     icon: <span className="text-xl mr-2">{category.icon}</span>,
     label: (
-      <div 
-        className="flex items-center justify-between w-full hover:text-[#2189FF] transition-colors"
-        onClick={() => navigate(`/category/${category.id}`)}
-      >
+      <Menu.Item onClick={() => handleCategoryClick(`/${category.id}`)}>
         {getCategoryName(category)}
-      </div>
+      </Menu.Item>
     ),
   }));
 
@@ -40,7 +44,7 @@ const CategoryMenu = () => {
 
   return (
     <Dropdown 
-      menu={{ items: menuItems }}
+      menu={menuProps}
       trigger={['hover', 'click']}
       onOpenChange={(visible) => setIsHovered(visible)}
     >
@@ -51,7 +55,6 @@ const CategoryMenu = () => {
           rounded-lg 
           text-[#2189FF] 
           border border-[#2189FF] 
-          hover:bg-[#EAF4FF] 
           transition-all 
           duration-300 
           ${isHovered ? 'shadow-md' : ''}

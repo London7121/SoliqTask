@@ -109,7 +109,7 @@ export default function OurCourses() {
                                 onClick={() => handleProductClick(product)}
                             >
                                 <img
-                                    src={product.images[0]}
+                                    src={product.img}
                                     alt={renderMultilingualText(product.name)}
                                     className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
                                     loading="lazy"
