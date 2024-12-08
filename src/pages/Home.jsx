@@ -294,7 +294,10 @@ const Home = () => {
                   </h3>
                   <div className="flex items-center justify-between">
                     <span className="text-[#2189FF] font-bold">
-                      {product.price.toLocaleString()} so'm
+                      {product.price && product.price.toLocaleString ? 
+                        `${product.price.toLocaleString()} so'm` : 
+                        'Narx belgilanmagan'
+                      }
                     </span>
                     <button 
                       onClick={(e) => {

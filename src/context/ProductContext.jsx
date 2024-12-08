@@ -48,6 +48,16 @@ const getDefaultProducts = () => {
   return allProducts;
 };
 
+const processProducts = (rawProducts) => {
+  return rawProducts.map(product => ({
+    ...product,
+    price: product.price || 0,  // Default price to 0 if undefined
+    images: product.images || [],  // Default to empty array if undefined
+    name: product.name || 'Nomi ko\'rsatilmagan',  // Default name
+    description: product.description || 'Tavsif yo\'q'  // Default description
+  }));
+};
+
 const ProductContext = createContext();
 
 export const ProductProvider = ({ children }) => {
@@ -66,7 +76,7 @@ export const ProductProvider = ({ children }) => {
 
   const [products, setProducts] = useState(() => {
     const storedProducts = localStorage.getItem('products') || sessionStorage.getItem('products');
-    return storedProducts ? JSON.parse(storedProducts) : getDefaultProducts();
+    return storedProducts ? processProducts(JSON.parse(storedProducts)) : processProducts(getDefaultProducts());
   });
 
   // Kategoriyalar va mahsulotlarni localStorage va sessionStorage ga saqlash
