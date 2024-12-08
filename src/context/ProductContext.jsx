@@ -38,24 +38,60 @@ const defaultCategories = [
 const getDefaultProducts = () => {
   // Directly use category-specific data files
   const allProducts = [
-    ...erkaklar.map(product => ({...product, categoryId: 'erkaklar', language: 'uz'})),
-    ...ayollar.map(product => ({...product, categoryId: 'ayollar', language: 'uz'})),
-    ...bolalar.map(product => ({...product, categoryId: 'bolalar', language: 'uz'})),
-    ...kitoblar.map(product => ({...product, categoryId: 'kitoblar', language: 'uz'})),
-    ...maishiy_tex.map(product => ({...product, categoryId: 'maishiyTexnika', language: 'uz'}))
+    ...erkaklar.map(product => ({
+      ...product, 
+      categoryId: 'erkaklar', 
+      language: 'uz',
+      images: product.images || [product.image].filter(Boolean)
+    })),
+    ...ayollar.map(product => ({
+      ...product, 
+      categoryId: 'ayollar', 
+      language: 'uz',
+      images: product.images || [product.image].filter(Boolean)
+    })),
+    ...bolalar.map(product => ({
+      ...product, 
+      categoryId: 'bolalar', 
+      language: 'uz',
+      images: product.images || [product.image].filter(Boolean)
+    })),
+    ...kitoblar.map(product => ({
+      ...product, 
+      categoryId: 'kitoblar', 
+      language: 'uz',
+      images: product.images || [product.image].filter(Boolean)
+    })),
+    ...maishiy_tex.map(product => ({
+      ...product, 
+      categoryId: 'maishiyTexnika', 
+      language: 'uz',
+      images: product.images || [product.image].filter(Boolean)
+    }))
   ];
 
   return allProducts;
 };
 
 const processProducts = (rawProducts) => {
-  return rawProducts.map(product => ({
-    ...product,
-    price: product.price || 0,  // Default price to 0 if undefined
-    images: product.images || [],  // Default to empty array if undefined
-    name: product.name || 'Nomi ko\'rsatilmagan',  // Default name
-    description: product.description || 'Tavsif yo\'q'  // Default description
-  }));
+  return rawProducts.map(product => {
+    // Agar name ob'ekt bo'lmasa, multilingual formatga o'tkazamiz
+    const processedName = typeof product.name === 'string' 
+      ? { uz: product.name, ru: product.name } 
+      : product.name || { uz: 'Nomi ko\'rsatilmagan', ru: 'Не указано' };
+
+    return {
+      ...product,
+      name: processedName,
+      price: product.price || 0,  // Default price to 0 if undefined
+      images: (product.images && product.images.length > 0) 
+        ? product.images 
+        : [product.image].filter(Boolean),  // Ensure at least one image
+      description: product.description || 'Tavsif yo\'q',  // Default description
+      categoryId: product.categoryId || 'boshqa',  // Default category
+      language: product.language || 'uz'  // Default language
+    };
+  });
 };
 
 const ProductContext = createContext();
