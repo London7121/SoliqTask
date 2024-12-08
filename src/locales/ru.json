@@ -1,0 +1,21 @@
+{
+    "productManagement.title": "Управление товарами",
+    "addProduct.button": "Добавить товар",
+    "addProduct.title": "Добавление товара",
+    "editProduct.button": "Изменить",
+    "editProduct.title": "Редактирование товара",
+    "deleteProduct.title": "Удаление товара",
+    "deleteProduct.content": "Вы действительно хотите удалить этот товар?",
+    "deleteProduct.success": "Товар успешно удален",
+    "deleteProduct.button": "Удалить",
+    "productName": "Название товара",
+    "productNameRequired": "Пожалуйста, введите название товара",
+    "category": "Категория",
+    "categoryRequired": "Пожалуйста, выберите категорию",
+    "price": "Цена",
+    "priceRequired": "Пожалуйста, введите цену товара",
+    "description": "Описание",
+    "descriptionPlaceholder": "Дополнительная информация о товаре",
+    "actions": "Действия",
+    "cancel": "Отменить"
+}

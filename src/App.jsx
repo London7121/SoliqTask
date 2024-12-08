@@ -1,10 +1,15 @@
-import React, { useState, lazy, Suspense } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import React, { useState, lazy, Suspense, useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate, useParams, useNavigate } from 'react-router-dom';
 import { Link as ScrollLink } from 'react-scroll';
 import { LanguageProvider } from './context/LanguageContext';
 import { CartProvider } from './context/CartContext';
+import { AuthProvider, useAuth } from './context/AuthContext';
+import { OrderProvider } from './context/OrderContext';
+import { ProductProvider } from './context/ProductContext';
 import Loading from './components/Loading';
 import Header from './components/Header';
+// import AddProductModal from './components/AddProductModal';
+import SnowAnimation from './components/SnowAnimation';
 
 // Lazy loaded components
 const AntSelect = lazy(() => import('./components/AntSelect'));
@@ -13,7 +18,7 @@ const Footer = lazy(() => import('./components/Footer'));
 const ScrollToTopButton = lazy(() => import('./components/ScrollTopButton'));
 const OurCourses = lazy(() => import('./pages/OurCourses'));
 const OurTeachers = lazy(() => import('./pages/OurTeachers'));
-const AboutUs = lazy(() => import('./pages/AboutUs'));
+const About = lazy(() => import('./pages/About'));
 const Contact = lazy(() => import('./pages/Contact'));
 const MaqishiyTex = lazy(() => import('./pages/MaqishiyTex'));
 const Erkaklar = lazy(() => import('./pages/Erkaklar'));
@@ -22,8 +27,16 @@ const Bolalar = lazy(() => import('./pages/Bolalar'));
 const Kitoblar = lazy(() => import('./pages/Kitoblar'));
 const Cart = lazy(() => import('./pages/Cart'));
 const ProductModal = lazy(() => import('./components/ProductModal'));
+const Login = lazy(() => import('./pages/Admin/Login'));
+const Dashboard = lazy(() => import('./pages/Admin/Dashboard'));
+const CategoryPage = lazy(() => import('./pages/CategoryPage'));
+const ProductDetailPage = lazy(() => import('./pages/ProductDetailPage'));
+const Home = lazy(() => import('./pages/Home'));
+const FAQ = lazy(() => import('./pages/FAQ'));
 
 import start from '../src/assets/icons/star.png';
+import tell from '../src/assets/icons/call.png';
+import { resolveDynamicLink } from './utils/dynamicLinkResolver';
 
 const Banner = React.memo(() => (
   <div className="my-10 bg-[#EAF4FF] rounded-[36px] flex flex-col md:flex-row items-center justify-between p-6 md:p-0">
@@ -84,16 +97,33 @@ const NavLink = React.memo(({ to, text }) => (
   </ScrollLink>
 ));
 
-export default function App() {
+const ProtectedRoute = ({ children }) => {
+  const { isAuthenticated } = useAuth();
+  
+  if (!isAuthenticated) {
+    return <Navigate to="/admin/login" />;
+  }
+
+  return children;
+};
+
+function AppContent() {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isAddProductModalOpen, setIsAddProductModalOpen] = useState(false);
 
-  const toggleMenu = () => setIsOpen(!isOpen);
+  const toggleMenu = () => {
+    setIsOpen(!isOpen);
+  };
 
   const handleProductClick = (product) => {
     setSelectedProduct(product);
     setIsModalOpen(true);
+  };
+
+  const handleAddProduct = () => {
+    setIsAddProductModalOpen(true);
   };
 
   const handleModalClose = () => {
@@ -102,60 +132,84 @@ export default function App() {
   };
 
   return (
-    <Router>
-      <LanguageProvider>
-        <CartProvider>
-          <div className='max-w-[1450px] mx-auto'>
-            <Suspense fallback={<Loading />}>
-              <ScrollToTopButton />
-            </Suspense>
+    <div className="max-w-[1450px] mx-auto">
+      <Suspense fallback={<Loading />}>
+        <ScrollToTopButton />
+      </Suspense>
 
-            <Header isOpen={isOpen} toggleMenu={toggleMenu} />
+      <Header isOpen={isOpen} toggleMenu={toggleMenu} onAddProduct={handleAddProduct} />
 
-            <Routes>
-              <Route path="/cart" element={
-                <Suspense fallback={<Loading />}>
-                  <Cart />
-                </Suspense>
-              } />
-              <Route path="/" element={
-                <div className="container mx-auto max-w-[1300px] h-auto p-8 my-2">
-                  <Banner />
-                  <Suspense fallback={<Loading />}>
-                    <OurCourses onProductClick={handleProductClick} />
-                    <OurTeachers onProductClick={handleProductClick} />
-                    <MaqishiyTex onProductClick={handleProductClick} />
-                    <Erkaklar onProductClick={handleProductClick} />
-                    <Ayollar onProductClick={handleProductClick} />
-                    <Bolalar onProductClick={handleProductClick} />
-                    <Kitoblar onProductClick={handleProductClick} />
-                    <AboutUs />
-                    <div id="faq" className="my-10 h-auto py-10">
-                      <p className='text-[#0B2441] text-[28px] font-bold text-center lg:text-start'>
-                        Ko'p so'raladigan savollar
-                      </p>
-                      <Faq />
-                    </div>
-                    <Contact />
-                  </Suspense>
-                </div>
-              } />
-            </Routes>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/admin/login" element={<Login />} />
+        <Route path="/admin/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
+        <Route path="/cart" element={<Cart />} />
+        <Route path="/category/:categoryId" element={<CategoryPage />} />
+        <Route path="/product/:productId" element={<ProductDetailPage />} />
+        <Route path="/erkaklar" element={<Erkaklar onProductClick={handleProductClick} />} />
+        <Route path="/ayollar" element={<Ayollar onProductClick={handleProductClick} />} />
+        <Route path="/bolalar" element={<Bolalar onProductClick={handleProductClick} />} />
+        <Route path="/kitoblar" element={<Kitoblar onProductClick={handleProductClick} />} />
+        <Route path="/courses" element={<OurCourses onProductClick={handleProductClick} />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<Contact />} />
+      </Routes>
 
-            <Suspense fallback={<Loading />}>
-              <Footer />
-            </Suspense>
+      <Suspense fallback={<Loading />}>
+        <Footer />
+      </Suspense>
 
-            <Suspense fallback={<Loading />}>
-              <ProductModal
-                isOpen={isModalOpen}
-                onClose={handleModalClose}
-                product={selectedProduct}
-              />
-            </Suspense>
-          </div>
-        </CartProvider>
-      </LanguageProvider>
-    </Router>
+      <Suspense fallback={<Loading />}>
+        <ProductModal
+          isOpen={isModalOpen}
+          onClose={handleModalClose}
+          product={selectedProduct}
+        />
+      </Suspense>
+      
+    </div>
   );
 }
+
+const DynamicLinkResolver = () => {
+  const { linkId } = useParams();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const resolveLink = async () => {
+      const resolvedPath = await resolveDynamicLink(linkId);
+      if (resolvedPath) {
+        navigate(resolvedPath);
+      } else {
+        navigate('/');
+      }
+    };
+
+    resolveLink();
+  }, [linkId, navigate]);
+
+  return <div>Yo'naltirilmoqda...</div>;
+};
+
+function App() {
+  return (
+    <AuthProvider>
+      <LanguageProvider>
+        <CartProvider>
+          <OrderProvider>
+            <ProductProvider>
+              <Router>
+                <div className="App">
+                  <SnowAnimation />
+                  <AppContent />
+                </div>
+              </Router>
+            </ProductProvider>
+          </OrderProvider>
+        </CartProvider>
+      </LanguageProvider>
+    </AuthProvider>
+  );
+}
+
+export default App;

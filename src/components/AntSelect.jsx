@@ -3,16 +3,16 @@ import { Select, Space } from 'antd';
 import { useLanguage } from '../context/LanguageContext';
 
 export default function AntSelect() {
-    const { language, setLanguage } = useLanguage();
+    const { currentLanguage, changeLanguage } = useLanguage();
 
     const handleChange = (value) => {
-        setLanguage(value.toLowerCase());
+        changeLanguage(value.toLowerCase());
     };
 
     return (
         <Space wrap>
             <Select
-                defaultValue={language.toUpperCase()}
+                defaultValue={currentLanguage.toUpperCase()}
                 className="custom-select"
                 style={{
                     width: 60,

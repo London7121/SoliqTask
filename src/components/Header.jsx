@@ -1,163 +1,160 @@
-import React from 'react';
-import { Link as ScrollLink } from 'react-scroll';
-import { useNavigate, useLocation } from 'react-router-dom';
-import { RxHamburgerMenu } from "react-icons/rx";
-import { IoMdClose } from "react-icons/io";
+import React, { useState } from 'react';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { Drawer, Input } from 'antd';
+import { 
+  MenuOutlined, 
+  SearchOutlined, 
+  ShoppingCartOutlined 
+} from '@ant-design/icons';
+
+import CategoryMenu from './CategoryMenu';
+import { useLanguage } from '../context/LanguageContext';
 import { useCart } from '../context/CartContext';
-import AntSelect from './AntSelect';
 import logo from '../assets/icons/P.png';
 
-const Header = ({ isOpen, toggleMenu }) => {
-  const { cartItems } = useCart();
+const { Search } = Input;
+
+const Header = () => {
+  const [drawerVisible, setDrawerVisible] = useState(false);
+  const { t } = useLanguage();
+  const { cartItems = [] } = useCart();
   const navigate = useNavigate();
   const location = useLocation();
-  const isHomePage = location.pathname === '/';
 
-  const renderNavLinks = (onClick = null) => {
-    if (!isHomePage) {
-      return (
-        <button
-          onClick={() => navigate('/')}
-          className="cursor-pointer"
-        >
-          Bosh sahifa
-        </button>
-      );
-    }
-
-    return (
-      <div className="flex flex-col md:flex-row items-center gap-8">
-        <ScrollLink
-          to="bolalar"
-          spy={true}
-          smooth={true}
-          offset={-70}
-          duration={500}
-          className="cursor-pointer"
-          onClick={onClick}
-        >
-          Bolalar
-        </ScrollLink>
-        <ScrollLink
-          to="kitoblar"
-          spy={true}
-          smooth={true}
-          offset={-70}
-          duration={500}
-          className="cursor-pointer"
-          onClick={onClick}
-        >
-          Kitoblar
-        </ScrollLink>
-        <ScrollLink
-          to="about"
-          spy={true}
-          smooth={true}
-          offset={-70}
-          duration={500}
-          className="cursor-pointer"
-          onClick={onClick}
-        >
-          Biz haqimizda
-        </ScrollLink>
-        <ScrollLink
-          to="contact"
-          spy={true}
-          smooth={true}
-          offset={-70}
-          duration={500}
-          className="cursor-pointer"
-          onClick={onClick}
-        >
-          Bog'lanish
-        </ScrollLink>
-        <ScrollLink
-          to="faq"
-          spy={true}
-          smooth={true}
-          offset={-70}
-          duration={500}
-          className="cursor-pointer"
-          onClick={onClick}
-        >
-          Ko'p so'raladigan savollar
-        </ScrollLink>
-      </div>
-    );
+  const showDrawer = () => {
+    setDrawerVisible(true);
   };
 
+  const onClose = () => {
+    setDrawerVisible(false);
+  };
+
+  const scrollToSection = (sectionId) => {
+    const section = document.getElementById(sectionId);
+    if (section) {
+      section.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  const handleSearch = (value) => {
+    navigate(`/search?query=${value}`);
+  };
+
+  const navigationLinks = [
+    { 
+      name: t('about_us'), 
+      onClick: () => scrollToSection('about') 
+    },
+    { 
+      name: t('faq'), 
+      onClick: () => scrollToSection('faq') 
+    }
+  ];
+
   return (
-    <nav className="flex flex-col md:flex-row items-center justify-between m-4">
-      <div className="flex items-center justify-between w-full md:w-auto gap-7 ml-4">
-        <img 
-          src={logo} 
-          alt="logo" 
-          className="w-28 h-auto cursor-pointer" 
-          onClick={() => navigate('/')}
-          loading="lazy" 
-        />
-        <ScrollLink
-          to="ourCourses"
-          smooth={true}
-          duration={500}
-          className="text-[15px] cursor-pointer font-medium w-[140px] h-[45px] rounded-[16px] bg-[#EAF4FF] duration-100 hover:bg-[#e0ecf8] text-[#2189FF] flex items-center justify-center gap-3 px-2 ml-2"
-        >
-          Kategoriyalar
-        </ScrollLink>
-        <button
-          onClick={toggleMenu}
-          className="md:hidden flex items-center p-2 border border-[#2189FF] rounded text-[#2189FF] transition-transform duration-300"
-          aria-label="Toggle menu"
-        >
-          <div className={`transition-transform duration-300 ${isOpen ? 'rotate-180 opacity-0' : 'rotate-0 opacity-100'}`}>
-            <RxHamburgerMenu size={25} />
+    <header className="fixed top-0 left-0 right-0 z-50 bg-white shadow-md">
+      <div className="container mx-auto px-4 py-3 pb-1 flex items-center justify-between">
+        {/* Logo */}
+        <Link to="/" className="flex items-center">
+          <img src={logo} alt="Power.uz Logo" className="h-20 w-auto" />
+        </Link>
+
+        {/* Desktop Navigation */}
+        <nav className="hidden md:flex items-center space-x-6">
+          <CategoryMenu />
+          {navigationLinks.map((link, index) => (
+            <button 
+              key={index} 
+              onClick={link.onClick} 
+              className="text-[#2189FF] hover:text-[#1a6cd1]"
+            >
+              {link.name}
+            </button>
+          ))}
+        </nav>
+
+        {/* Search and Cart */}
+        <div className="flex items-center space-x-4">
+          <div className="hidden md:block w-64">
+            <Search 
+              placeholder={t('search')}
+              onSearch={handleSearch}
+              enterButton={<SearchOutlined />}
+              className="rounded-full"
+            />
           </div>
-          <div className={`absolute transition-transform duration-300 ${isOpen ? 'rotate-0 opacity-100' : 'rotate-90 opacity-0'}`}>
-            <IoMdClose size={25} />
-          </div>
-        </button>
+
+          <button 
+            onClick={() => navigate('/cart')} 
+            className="relative text-gray-700 hover:text-[#2189FF] transition-colors"
+          >
+            <ShoppingCartOutlined className="text-2xl" />
+            {cartItems.length > 0 && (
+              <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full px-2 py-0.5">
+                {cartItems.length}
+              </span>
+            )}
+          </button>
+
+          {/* Mobile Menu Toggle */}
+          <button 
+            onClick={showDrawer} 
+            className="md:hidden text-gray-700"
+          >
+            <MenuOutlined className="text-2xl" />
+          </button>
+        </div>
       </div>
 
-      <div className="hidden md:flex items-center gap-8">
-        {renderNavLinks()}
-      </div>
+      {/* Mobile Drawer */}
+      <Drawer
+        title={<img src={logo} alt="Power.uz Logo" className="h-10 w-auto" />}
+        placement="right"
+        onClose={onClose}
+        open={drawerVisible}
+        className="mobile-drawer"
+      >
+        <div className="mb-4">
+          <Search 
+            placeholder={t('search')}
+            onSearch={handleSearch}
+            enterButton={<SearchOutlined />}
+          />
+        </div>
 
-      <div className="hidden md:flex items-center gap-4">
-        <AntSelect />
-        <button 
-          onClick={() => navigate('/cart')}
-          className="relative flex items-center p-2 border border-[#2189FF] rounded text-[#2189FF] hover:bg-[#EAF4FF]"
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
-          </svg>
-          {cartItems.length > 0 && (
-            <span className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs">
-              {cartItems.length}
-            </span>
-          )}
-        </button>
-      </div>
+        <CategoryMenu />
 
-      {isOpen && (
-        <div className="md:hidden flex flex-col items-center gap-4 w-full mt-4">
-          {renderNavLinks(toggleMenu)}
-          <AntSelect />
+        <nav className="mt-4 space-y-4">
+          {navigationLinks.map((link, index) => (
+            <button 
+              key={index}
+              onClick={link.onClick}
+              className="block w-full text-left text-gray-700 hover:text-[#2189FF] transition-colors"
+            >
+              {link.name}
+            </button>
+          ))}
+        </nav>
+
+        <div className="mt-6 flex justify-between">
           <button 
             onClick={() => {
               navigate('/cart');
-              toggleMenu();
-            }}
-            className="flex items-center gap-2 p-2 border border-[#2189FF] rounded text-[#2189FF] w-full justify-center"
+              onClose();
+            }} 
+            className="flex items-center space-x-2 text-gray-700 hover:text-[#2189FF]"
           >
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
-            </svg>
-            Savatcha {cartItems.length > 0 && `(${cartItems.length})`}
+            <ShoppingCartOutlined className="text-xl" />
+            <span>{t('cart')}</span>
+            {cartItems.length > 0 && (
+              <span className="bg-red-500 text-white text-xs rounded-full px-2 py-0.5 ml-2">
+                {cartItems.length}
+              </span>
+            )}
           </button>
         </div>
-      )}
-    </nav>
+      </Drawer>
+    </header>
   );
 };
 

@@ -1,0 +1,21 @@
+{
+    "productManagement.title": "Mahsulotlar Boshqaruvi",
+    "addProduct.button": "Mahsulot qo'shish",
+    "addProduct.title": "Mahsulot qo'shish",
+    "editProduct.button": "Tahrirlash",
+    "editProduct.title": "Mahsulotni tahrirlash",
+    "deleteProduct.title": "Mahsulotni o'chirish",
+    "deleteProduct.content": "Haqiqatan ham ushbu mahsulotni o'chirmoqchimisiz?",
+    "deleteProduct.success": "Mahsulot muvaffaqiyatli o'chirildi",
+    "deleteProduct.button": "O'chirish",
+    "productName": "Mahsulot nomi",
+    "productNameRequired": "Iltimos, mahsulot nomini kiriting",
+    "category": "Kategoriya",
+    "categoryRequired": "Iltimos, kategoriyani tanlang",
+    "price": "Narx",
+    "priceRequired": "Iltimos, mahsulot narxini kiriting",
+    "description": "Tavsif",
+    "descriptionPlaceholder": "Mahsulot haqida qo'shimcha ma'lumot",
+    "actions": "Harakatlar",
+    "cancel": "Bekor qilish"
+}

@@ -2,25 +2,67 @@ import React, { createContext, useContext, useState, useEffect } from 'react';
 
 const CartContext = createContext();
 
+const MAX_CART_ITEMS = 20; // Maksimal savatga qo'shiladigan mahsulotlar soni
+
 export const CartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState(() => {
-    const savedCart = localStorage.getItem('cartItems');
-    return savedCart ? JSON.parse(savedCart) : [];
+    try {
+      const savedCart = localStorage.getItem('cartItems');
+      return savedCart ? JSON.parse(savedCart) : [];
+    } catch (error) {
+      console.error("localStorage dan ma'lumot o'qishda xatolik:", error);
+      return [];
+    }
+  });
+
+  const [lastOrderId, setLastOrderId] = useState(() => {
+    try {
+      const savedId = localStorage.getItem('lastOrderId');
+      return savedId ? parseInt(savedId) : 0;
+    } catch (error) {
+      console.error("localStorage dan oxirgi buyurtma ID sini o'qishda xatolik:", error);
+      return 0;
+    }
   });
 
   useEffect(() => {
-    localStorage.setItem('cartItems', JSON.stringify(cartItems));
+    try {
+      // Savatdagi mahsulotlar sonini cheklash
+      const limitedCartItems = cartItems.slice(0, MAX_CART_ITEMS);
+      localStorage.setItem('cartItems', JSON.stringify(limitedCartItems));
+    } catch (error) {
+      console.error("localStorage ga ma'lumot yozishda xatolik:", error);
+      // Agar localStorage to'lgan bo'lsa, eng so'nggi qo'shilgan mahsulotlarni saqlab qolish
+      const limitedCartItems = cartItems.slice(-MAX_CART_ITEMS);
+      localStorage.setItem('cartItems', JSON.stringify(limitedCartItems));
+    }
   }, [cartItems]);
+
+  useEffect(() => {
+    try {
+      localStorage.setItem('lastOrderId', lastOrderId.toString());
+    } catch (error) {
+      console.error("Oxirgi buyurtma ID sini saqlashda xatolik:", error);
+    }
+  }, [lastOrderId]);
 
   const addToCart = (item) => {
     setCartItems(prevItems => {
+      // Agar savatda allaqachon shu mahsulot bo'lsa, uning sonini oshirish
       const existingItem = prevItems.find(i => i.id === item.id);
       if (existingItem) {
         return prevItems.map(i =>
           i.id === item.id ? { ...i, quantity: i.quantity + 1 } : i
         );
       }
-      return [...prevItems, { ...item, quantity: 1 }];
+      
+      // Agar savatda bo'sh o'rin bo'lsa, yangi mahsulotni qo'shish
+      if (prevItems.length < MAX_CART_ITEMS) {
+        return [...prevItems, { ...item, quantity: 1 }];
+      }
+      
+      // Agar savat to'la bo'lsa, eng avvalgi mahsulotni o'chirib, yangi mahsulotni qo'shish
+      return [...prevItems.slice(1), { ...item, quantity: 1 }];
     });
   };
 
@@ -39,7 +81,12 @@ export const CartProvider = ({ children }) => {
 
   const clearCart = () => {
     setCartItems([]);
-    localStorage.removeItem('cartItems');
+  };
+
+  const getNextOrderId = () => {
+    const nextId = lastOrderId + 1;
+    setLastOrderId(nextId);
+    return nextId;
   };
 
   const value = {
@@ -47,7 +94,8 @@ export const CartProvider = ({ children }) => {
     addToCart,
     removeFromCart,
     updateQuantity,
-    clearCart
+    clearCart,
+    getNextOrderId
   };
 
   return (
@@ -64,3 +112,5 @@ export const useCart = () => {
   }
   return context;
 };
+
+export default CartContext;

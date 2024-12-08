@@ -1,9 +1,69 @@
-import React from 'react'
-import { FaArrowRight } from "react-icons/fa";
-import { FaArrowLeft } from "react-icons/fa";
-import { our_teachers } from '../data/data'
+import React, { useState } from 'react';
+import { FaArrowRight, FaArrowLeft, FaShoppingCart, FaEye } from "react-icons/fa";
+import { our_teachers } from '../data/data';
+import { useLanguage } from '../context/LanguageContext';
+import { useCart } from '../context/CartContext';
+import ProductModal from '../components/ProductModal';
+import { notification } from 'antd';
 
-export default function OurTeachers({ onProductClick }) {
+export default function OurTeachers() {
+    const { t } = useLanguage();
+    const { addToCart } = useCart();
+    const [currentImageIndex, setCurrentImageIndex] = useState({});
+    const [selectedProduct, setSelectedProduct] = useState(null);
+    const [isModalVisible, setIsModalVisible] = useState(false);
+
+    const handleAddToCart = (product) => {
+        const formattedProduct = {
+            ...product,
+            name: product.title,
+            price: parseInt(product.job_name.replace(/[^\d]/g, '')),
+            image: product.img,
+            description: product.title,
+            features: [t('quality'), t('price'), t('delivery')]
+        };
+        
+        addToCart(formattedProduct);
+        notification.success({
+            message: t('added_to_cart_title'),
+            description: `${formattedProduct.name} ${t('added_to_cart_desc')}`,
+            placement: 'topRight',
+        });
+    };
+
+    const handleProductClick = (product) => {
+        const formattedProduct = {
+            ...product,
+            name: product.title,
+            price: parseInt(product.job_name.replace(/[^\d]/g, '')),
+            image: product.img,
+            description: product.title,
+            features: [t('quality'), t('price'), t('delivery')]
+        };
+        
+        setSelectedProduct(formattedProduct);
+        setIsModalVisible(true);
+    };
+
+    const handleCloseModal = () => {
+        setIsModalVisible(false);
+        setSelectedProduct(null);
+    };
+
+    const handleNextImage = (productId, e) => {
+        e.stopPropagation();
+        const currentIndex = currentImageIndex[productId] || 0;
+        const nextIndex = (currentIndex + 1) % 1; // OurTeachers uchun faqat bitta rasm
+        setCurrentImageIndex(prev => ({ ...prev, [productId]: nextIndex }));
+    };
+
+    const handlePrevImage = (productId, e) => {
+        e.stopPropagation();
+        const currentIndex = currentImageIndex[productId] || 0;
+        const prevIndex = currentIndex === 0 ? 0 : currentIndex - 1;
+        setCurrentImageIndex(prev => ({ ...prev, [productId]: prevIndex }));
+    };
+
     return (
         <div>
             <div id="teachers" className="my-16 h-auto py-2">
@@ -23,35 +83,63 @@ export default function OurTeachers({ onProductClick }) {
                 </div>
 
                 {/* Products Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mt-8">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mt-8">
                     {our_teachers.map((product) => (
                         <div
                             key={product.id}
-                            className="bg-white rounded-lg shadow-md overflow-hidden cursor-pointer transform transition-transform duration-300 hover:scale-105"
-                            onClick={() => onProductClick({
-                                ...product,
-                                name: product.title,
-                                price: parseInt(product.job_name.replace(/[^\d]/g, '')),
-                                image: product.img,
-                                description: product.title,
-                                features: ["Sifatli mahsulot", "Qulay narx", "Tezkor yetkazib berish"]
-                            })}
+                            className="bg-white rounded-lg shadow-md overflow-hidden cursor-pointer group relative transform transition-transform duration-300 hover:scale-105"
                         >
-                            <div className="relative h-48">
+                            <div 
+                                className="relative h-48 overflow-hidden"
+                                onClick={() => handleProductClick(product)}
+                            >
                                 <img
                                     src={product.img}
                                     alt={product.title}
-                                    className="w-full h-full object-cover"
+                                    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
                                     loading="lazy"
                                 />
+                                <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-300 flex items-center justify-center space-x-4 opacity-0 group-hover:opacity-100">
+                                    <button 
+                                        onClick={(e) => {
+                                            e.stopPropagation();
+                                            handleProductClick(product);
+                                        }}
+                                        className="bg-white p-2 rounded-full shadow-md"
+                                    >
+                                        <FaEye className="text-[#2189FF]" />
+                                    </button>
+                                    <button 
+                                        onClick={(e) => {
+                                            e.stopPropagation();
+                                            handleAddToCart(product);
+                                        }}
+                                        className="bg-white p-2 rounded-full shadow-md"
+                                    >
+                                        <FaShoppingCart className="text-[#0B2441]" />
+                                    </button>
+                                </div>
                             </div>
-                            <div className="p-4">
-                                <h3 className="text-lg font-semibold text-[#0B2441] mb-2">{product.title}</h3>
-                                <p className="text-[#2189FF] font-bold">{product.job_name}</p>
+                            <div 
+                                className="p-4"
+                                onClick={() => handleProductClick(product)}
+                            >
+                                <h3 className="text-lg font-semibold mb-2 line-clamp-2 text-[#0B2441]">{product.title}</h3>
+                                <div className="flex items-center justify-between">
+                                    <span className="text-[#2189FF] font-bold">{product.job_name}</span>
+                                </div>
                             </div>
                         </div>
                     ))}
                 </div>
+
+                {selectedProduct && (
+                    <ProductModal 
+                        isOpen={isModalVisible} 
+                        onClose={handleCloseModal} 
+                        product={selectedProduct} 
+                    />
+                )}
             </div>
         </div>
     )

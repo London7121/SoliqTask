@@ -6,20 +6,27 @@ import icon4 from '../assets/icons/Marketing.png'
 import icon5 from '../assets/icons/Dizayn (1).png'
 import icon6 from '../assets/icons/Dasturlash.png'
 import icon7 from '../assets/icons/Dasturlash.png'
-const maishiy_tex = [
+
+export const maishiy_tex = [
     {
         id: 1,
-        title: "Massajniy dushavoy reka",
-        job_name: "109.000 so'm",
-        img: "https://grafus.uz/backend/web/uploads/product/550694007.jpg",
-        icon: icon6
+        title: "Changyutgich",
+        job_name: "299.000 so'm",
+        img: "https://grafus.uz/backend/web/uploads/product/473431007.jpg",
+        icon: icon1
     },
     {
         id: 2,
-        title: "Vitek pechka",
-        job_name: "199.000 so'm",
-        img: "https://files.glotr.uz/company/000/015/876/products/2023/01/10/2023-01-10-18-47-41-908422-f3334441a81ae0d5cc60b50651652b21.webp?_=ozbol",
-        icon: icon7
+        title: "Muzlatgich",
+        job_name: "1.299.000 so'm",
+        img: "https://grafus.uz/backend/web/uploads/product/798514007.jpg",
+        icon: icon3
     },
-]
-export default maishiy_tex;
+    {
+        id: 3,
+        title: "Kir yuvish mashinasi",
+        job_name: "1.499.000 so'm",
+        img: "https://alijahon.uz/media/product/IMG_4771.jpeg",
+        icon: icon7
+    }
+];
