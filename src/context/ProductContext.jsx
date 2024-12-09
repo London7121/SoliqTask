@@ -22,7 +22,8 @@ export const ProductProvider = ({ children }) => {
         id: `yangi-yil-${item.id}`,
         category: 'Yangi Yil',
         categoryId: 'yangi-yil',
-        price: item.price || parseInt(item.job_name?.replace(/\D/g, '') || '0')
+        price: item.price || parseInt(item.job_name?.replace(/\D/g, '') || '0'),
+        icon: item.icon || 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRTY_Mhafa-o6-RwLNsiw8PwXspog-M_WP0Tw&s'
       })),
       ...products.map(product => ({
         ...product,
@@ -67,27 +68,33 @@ export const ProductProvider = ({ children }) => {
     const uniqueCategories = [
       {
         id: 'yangi-yil',
-        name: 'Yangi Yil'
+        name: 'Yangi Yil',
+        icon: 'https://static.review.uz/crop/1/6/1400__100_1697911004.jpg?v=1640014768'
       },
       {
         id: 'erkaklar',
-        name: 'Erkaklar'
+        name: 'Erkaklar',
+        icon: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRqeESJnQLv8iz2MLkmYJUt9143e6aCgMs2Hg&s'
       },
       {
         id: 'ayollar',
-        name: 'Ayollar'
+        name: 'Ayollar',
+        icon: 'https://olcha.uz/image/700x700/products/ROZ7LOVrAqeWBUUoO5mnFFGNAzeYKtfCwZm2q0kxhghdmpdxlmFMJciOjXH9.jpg'
       },
       {
         id: 'bolalar',
-        name: 'Bolalar'
+        name: 'Bolalar',
+        icon: 'https://storage.kun.uz/source/7/QIadYO5buIleDHqqPMPABSx5HJ-7zr-W.jpg'
       },
       {
         id: 'kitoblar',
-        name: 'Kitoblar'
+        name: 'Kitoblar',
+        icon: 'https://rost24.uz/storage/72/b3/2a/57/conversions/unnamed-large.jpg'
       },
       {
         id: 'maishiy-texnika',
-        name: 'Maishiy Texnika'
+        name: 'Maishiy Texnika',
+        icon: 'https://domtut.uz/resources/uploads/post/top-10-internet-magazinov-bytovoy-tehniki-v-tashkente.jpg'
       }
     ];
 

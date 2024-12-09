@@ -1,5 +1,5 @@
 // images
-import person1 from '../assets/images/person1.png'
+import person1 from '../assets/icons/call.png'
 import person2 from '../assets/images/person2.png'
 import person3 from '../assets/images/person3.png'
 import person4 from '../assets/images/person4.png'
@@ -14,6 +14,7 @@ export const yangi_yil = [
         "id": "ny1",
         "name": "Bolalar uchun Qorbobo kiyimlari",
         "price": 129000,
+        "icon": person1,
         "categoryId": "yangi-yil",
         "images": [
             qorqiz_kiym,

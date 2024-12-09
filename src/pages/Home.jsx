@@ -10,8 +10,8 @@ import ProductModal from '../components/ProductModal';
 
 const Home = () => {
   const { products, categories, getLocalizedName } = useProducts();
-  console.log(products);
-  
+  console.log(categories.map(p => p));
+
   const { t, language } = useLanguage();
   const { addToCart } = useCart();
   const navigate = useNavigate();
@@ -39,7 +39,7 @@ const Home = () => {
     setSelectedProduct(product);
     setIsModalVisible(true);
     console.log(filteredProducts);
-    
+
   };
 
   const handleCloseModal = () => {
@@ -86,20 +86,26 @@ const Home = () => {
       >
         {t('all_categories')}
       </Button>
-      {categories.map(category => (
-        <Button
-          key={category.id}
-          type={selectedCategory === category.id ? 'primary' : 'default'}
-          onClick={() => setSelectedCategory(category.id)}
-          className="flex items-center gap-2"
-        >
-          {category.icon} {category.name?.[language] || category.name}
-          <Badge
-            count={products.filter(p => p.categoryId === category.id).length}
-            style={{ backgroundColor: '#52c41a' }}
-          />
-        </Button>
-      ))}
+      <div className='flex flex-wrap gap-2'>
+        {categories.map(category => (
+          <div
+            key={category.id}
+            type={selectedCategory === category.id ? 'primary' : 'default'}
+            onClick={() => setSelectedCategory(category.id)}
+            className="flex items-center gap-2 w-[140px] h-[140px] flex flex-col justify-between border border-gray-300 rounded-md cursor-pointer shadow-md hover:shadow-lg hover:border-[#2189FF] hover:transform hover:scale-105 transition duration-300 ease-in-out"
+          >
+
+            <img className='w-full h-[85px] object-cover p-1 rounded-t-md' src={category.icon} alt="icon" />
+            <p className='mb-3 flex items-center gap-2 justify-center'>
+              {category.name?.[language] || category.name}
+              <Badge
+                count={products.filter(p => p.categoryId === category.id).length}
+                style={{ backgroundColor: '#52c41a' }}
+              />
+            </p>
+          </div>
+        ))}
+      </div>
     </div>
   );
 
@@ -233,7 +239,7 @@ const Home = () => {
   return (
     <div className="container mx-auto px-4 md:px-8 lg:px-16">
       <div className="flex justify-between items-center mb-6">
-        <h2 className="text-2xl font-bold text-[#0B2441]">
+        <h2 className="text-2xl font-bold text-[#0B2441] dark:text-white">
           {selectedCategory === 'all'
             ? t('all_products')
             : categories.find(c => c.id === selectedCategory)?.name || selectedCategory
@@ -247,7 +253,7 @@ const Home = () => {
         </button>
       </div>
 
-      <div className="hidden md:block mb-6">
+      <div className="block mb-6">
         <CategoryPanel />
       </div>
 
