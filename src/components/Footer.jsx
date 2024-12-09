@@ -1,5 +1,5 @@
 import React from 'react'
-import logo from '../assets/icons/Power .png'
+import logo from '../assets/icons/Power.png'
 
 export const Footer = () => {
     return (

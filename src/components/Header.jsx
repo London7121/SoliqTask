@@ -13,7 +13,7 @@ import CategoryMenu from './CategoryMenu';
 import { useLanguage } from '../context/LanguageContext';
 import { useCart } from '../context/CartContext';
 import { useTheme } from '../context/ThemeContext';
-import logo from '../assets/icons/P.png';
+import logo from '../assets/icons/Power.png';
 
 const { Search } = Input;
 
@@ -80,7 +80,7 @@ const Header = () => {
       <div className="container mx-auto px-4 py-3 flex justify-between items-center">
         {/* Logo */}
         <Link to="/" className="flex items-center">
-          <img src={logo} alt="Power.uz Logo" className="h-20 w-auto" />
+          <img src={logo} alt="Power.uz Logo" className="h-6 md:h-20 w-auto" />
         </Link>
 
         {/* Mobile Menu Toggle */}

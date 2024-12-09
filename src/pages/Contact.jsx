@@ -1,6 +1,6 @@
 import Aos from 'aos';
 import React, { useEffect } from 'react'
-import Power from '../assets/icons/Power .png';
+import Power from '../assets/icons/Power.png';
 import start from '../assets/icons/star.png';
 import 'aos/dist/aos.css'
 import AntdForm from '../components/AntdForm';

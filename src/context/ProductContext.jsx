@@ -1,7 +1,7 @@
 import React, { createContext, useState, useContext, useEffect } from 'react';
 import { products } from '../data/products';
 import { ayollar } from '../data/ayollar';
-import yangi_yil from '../data/yangi_yil.json';
+import {yangi_yil} from '../data/yangi_yil';
 import bolalarData from '../data/bolalar.json';
 import kitoblarData from '../data/kitoblar.json';
 import maishiy_tex from '../data/maishiy_tex.json';
@@ -17,12 +17,12 @@ export const ProductProvider = ({ children }) => {
   useEffect(() => {
     // Mahsulotlarni birlashtirish
     const combinedProducts = [
-      ...yangi_yil.products.map(item => ({
+      ...yangi_yil.map(item => ({
         ...item,
         id: `yangi-yil-${item.id}`,
         category: 'Yangi Yil',
         categoryId: 'yangi-yil',
-        price: item.price
+        price: item.price || parseInt(item.job_name?.replace(/\D/g, '') || '0')
       })),
       ...products.map(product => ({
         ...product,
