@@ -57,9 +57,16 @@ const ProductModal = ({ isOpen, onClose, product }) => {
     navigate('/cart');
   };
 
-  const productImages = product.img && product.img.length > 0
-    ? product.img
-    : [product.img || 'https://via.placeholder.com/400x400.png?text=No+Image'];
+  const productImages = product.images && product.images.length > 0
+    ? product.images.map((image, index) => (
+        <div key={index} className="h-[400px] flex items-center justify-center">
+          <img
+            src={image}
+            className="h-full w-full object-contain rounded-lg"
+          />
+        </div>
+      ))
+    : 'https://via.placeholder.com/400x400.png?text=No+Image';
 
   const localizedName = getLocalizedName(product);
   const localizedDescription = getLocalizedDescription(product);
@@ -76,12 +83,8 @@ const ProductModal = ({ isOpen, onClose, product }) => {
       <div className="flex flex-col md:flex-row gap-6">
         <div className="w-full md:w-1/2">
           <Carousel dotPosition="bottom" autoplay>
-            <div className="h-[400px] flex items-center justify-center">
-              <img
-                src={product.img || product.images[0] || 'https://via.placeholder.com/400x400.png?text=No+Image'}
-                alt={product.title}
-                className="h-full w-full object-contain rounded-lg"
-              />
+            <div className="h-[400px] flex items-center justify-center rounded-lg">
+             {productImages}
             </div>
           </Carousel>
         </div>
@@ -91,7 +94,7 @@ const ProductModal = ({ isOpen, onClose, product }) => {
             {product.price.toLocaleString()} so'm
           </p>
 
-          <Descriptions 
+          <Descriptions
             // title={
             //   <h2 className="text-xl font-bold text-[#0B2441] dark:text-blue-600">
             //     {product.name}
@@ -142,8 +145,8 @@ const ProductModal = ({ isOpen, onClose, product }) => {
               onClick={handleAddToCart}
               disabled={isInCart}
               className={`flex-1 py-3 px-6 rounded-lg flex items-center justify-center gap-2 transition-colors ${isInCart
-                  ? 'bg-gray-400 cursor-not-allowed'
-                  : 'bg-[#2189FF] hover:bg-[#1a6ecc]'
+                ? 'bg-gray-400 cursor-not-allowed'
+                : 'bg-[#2189FF] hover:bg-[#1a6ecc]'
                 } text-white`}
             >
               {isAdded ? (

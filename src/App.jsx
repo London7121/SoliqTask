@@ -24,9 +24,9 @@ function AppContent() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isAddProductModalOpen, setIsAddProductModalOpen] = useState(false);
 
-  let location = useLocation();
+  const location = useLocation();
   useEffect(() => {
-    scrollTop();
+    window.scrollTo(0, 0); 
   }, [location.pathname]);
 
 

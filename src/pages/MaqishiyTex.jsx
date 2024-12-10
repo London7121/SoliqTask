@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { FaArrowRight, FaArrowLeft, FaShoppingCart, FaEye } from "react-icons/fa";
-import {maishiy_tex} from '../data/JS/maishiy_tex';
+import { maishiy_tex } from '../data/JS/maishiy_tex';
 import { useLanguage } from '../context/LanguageContext';
 import { useCart } from '../context/CartContext';
 import ProductModal from '../components/ProductModal';
-import { notification } from 'antd';
+import { Button, notification } from 'antd';
+import { useNavigate } from 'react-router-dom';
 
 export default function MaqishiyTex() {
     const { t, currentLanguage } = useLanguage();
@@ -15,7 +16,11 @@ export default function MaqishiyTex() {
 
     // Use the maishiy_tex array directly
     const products = maishiy_tex;
+    const navigate = useNavigate();
     console.log(products);
+    const handleProductDetail = (productId) => {
+        navigate(`/product/maishiy-tex-${productId}`);
+      };
 
 
     const handleAddToCart = (product) => {
@@ -39,6 +44,7 @@ export default function MaqishiyTex() {
     const handleProductClick = (product) => {
         const formattedProduct = {
             ...product,
+            id: product.id,
             name: product.name,
             price: product.price,
             image: product.images[0],
@@ -72,8 +78,8 @@ export default function MaqishiyTex() {
     };
 
     return (
-        <div className="container mx-auto px-4 my-16">
-            <div id="maishiyTex" className="h-auto py-2">
+        <div className="container mx-auto px-2 mb-16">
+            <div id="maishiyTex" className="h-auto">
                 <div data-aos="fade-up" className='flex flex-col lg:flex-row items-center justify-between gap-3'>
                     <div className='flex flex-col items-start gap-4'>
                         <p className='text-[28px] font-bold text-[#0B2441] dark:text-white'>{t('appliances')}</p>
@@ -90,11 +96,11 @@ export default function MaqishiyTex() {
                 </div>
 
                 {/* Products Grid */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mt-8">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mt-8 ">
                     {products.map((product) => (
                         <div
                             key={product.id}
-                            className="bg-white rounded-lg shadow-md overflow-hidden cursor-pointer group relative transform transition-transform duration-300 hover:scale-105"
+                            className="bg-white rounded-lg shadow-md overflow-hidden cursor-pointer group relative transform transition-transform duration-300 hover:scale-105 dark:bg-gray-900"
                         >
                             <div
                                 className="relative h-48 overflow-hidden"
@@ -147,9 +153,15 @@ export default function MaqishiyTex() {
                                 className="p-4"
                                 onClick={() => handleProductClick(product)}
                             >
-                                <h3 className="text-lg font-semibold mb-2 line-clamp-2 text-[#0B2441]">{product.name}</h3>
+                                <h3 className="text-lg font-semibold mb-2 line-clamp-2 text-[#0B2441] dark:text-white">{product.name}</h3>
                                 <div className="flex items-center justify-between">
                                     <span className="text-[#2189FF] font-bold">{product.price.toLocaleString()} so'm</span>
+                                    <Button
+                                        type="primary"
+                                        onClick={() => handleProductDetail(product.id)}
+                                    >
+                                        Batafsil
+                                    </Button>
                                 </div>
                             </div>
                         </div>

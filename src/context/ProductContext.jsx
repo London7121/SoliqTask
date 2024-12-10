@@ -1,8 +1,8 @@
 import React, { createContext, useState, useContext, useEffect } from 'react';
 import { ayollar } from '../data/JS/ayollar';
 import {yangi_yil} from '../data/JS/yangi_yil';
-import bolalarData from '../data/bolalar.json';
-import kitoblarData from '../data/kitoblar.json';
+import {bolalar} from '../data/JS/bolalar';
+import {kitoblar} from '../data/JS/kitoblar';
 import {maishiy_tex} from '../data/JS/maishiy_tex';
 import { erkaklar } from '../data/JS/erkaklar';
 
@@ -23,7 +23,6 @@ export const ProductProvider = ({ children }) => {
         category: 'Yangi Yil',
         categoryId: 'yangi-yil',
         price: item.price || parseInt(item.job_name?.replace(/\D/g, '') || '0'),
-        icon: item.icon || 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRTY_Mhafa-o6-RwLNsiw8PwXspog-M_WP0Tw&s'
       })),
       ...ayollar.map(item => ({
         ...item,
@@ -34,19 +33,19 @@ export const ProductProvider = ({ children }) => {
       })),
       ...erkaklar.map(item => ({
         ...item,
-        id: `ayollar-${item.id}`,
+        id: `erkaklar-${item.id}`,
         category: 'Erkaklar',
         categoryId: 'erkaklar',
         price: parseInt(item.price || '0')
       })),
-      ...bolalarData.products.map(item => ({
+      ...bolalar.map(item => ({
         ...item,
         id: `bolalar-${item.id}`,
         category: 'Bolalar',
         categoryId: 'bolalar',
         price: item.price
       })),
-      ...kitoblarData.products.map(item => ({
+      ...kitoblar.map(item => ({
         ...item,
         id: `kitoblar-${item.id}`,
         category: 'Kitoblar',

@@ -62,7 +62,7 @@ const ProductCard = ({ product }) => {
           </div>
         )}
         <img
-          src={product.img || product.images?.[currentImageIndex]}
+          src={product.img || product.images.map((image) => image)[currentImageIndex]}
           alt={getLocalizedName(product)}
           className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
           loading="lazy"

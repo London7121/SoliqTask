@@ -12,7 +12,7 @@ const ProductSlider = ({ product }) => {
         <div key={index} className="h-[300px] flex items-center justify-center">
           <img 
             src={image} 
-            alt={`${product.title} - ${index + 1}`} 
+            alt={`${product.name} - ${index + 1}`} 
             className="max-h-full max-w-full object-contain rounded-lg"
           />
         </div>

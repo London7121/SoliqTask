@@ -146,12 +146,12 @@ const Home = () => {
   );
 
   const AboutSection = () => (
-    <div id="about" className="container mx-auto px-4 py-16 bg-gray-50">
-      <div className="text-center mb-12">
-        <h2 className="text-4xl font-bold text-[#0B2441] mb-4">
+    <div id="about" className="container mx-auto px-4 py-16 bg-gray-50 rounded-lg shadow-md dark:bg-gray-800">
+      <div className="text-center mb-12 dark:text-white">
+        <h2 className="text-4xl font-bold text-[#0B2441] mb-4 dark:text-blue-600">
           {t('about_us_title')}
         </h2>
-        <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+        <p className="text-xl text-gray-600 max-w-3xl mx-auto dark:text-white">
           {t('about_us_description')}
         </p>
       </div>
@@ -161,7 +161,7 @@ const Home = () => {
           <h3 className="text-3xl font-semibold text-[#2189FF] mb-6">
             {t('our_mission')}
           </h3>
-          <p className="text-lg text-gray-700 leading-relaxed">
+          <p className="text-lg text-gray-700 leading-relaxed dark:text-gray-400">
             {t('mission_description')}
           </p>
         </div>
@@ -171,15 +171,15 @@ const Home = () => {
             {t('our_values')}
           </h3>
           <ul className="space-y-3">
-            <li className="flex items-center">
+            <li className="flex items-center dark:text-gray-400">
               <span className="mr-3 text-[#2189FF] text-2xl">✓</span>
               {t('value_1')}
             </li>
-            <li className="flex items-center">
+            <li className="flex items-center dark:text-gray-400">
               <span className="mr-3 text-[#2189FF] text-2xl">✓</span>
               {t('value_2')}
             </li>
-            <li className="flex items-center">
+            <li className="flex items-center dark:text-gray-400">
               <span className="mr-3 text-[#2189FF] text-2xl">✓</span>
               {t('value_3')}
             </li>
@@ -192,7 +192,7 @@ const Home = () => {
   const FAQSection = () => (
     <div id="faq" className="container mx-auto px-4 py-16">
       <div className="text-center mb-12">
-        <h2 className="text-4xl font-bold text-[#0B2441] mb-4">
+        <h2 className="text-4xl font-bold text-[#0B2441] mb-4 dark:text-blue-600">
           {t('frequently_asked_questions')}
         </h2>
         <p className="text-xl text-gray-600 max-w-3xl mx-auto">
@@ -218,12 +218,12 @@ const Home = () => {
           ].map((faq, index) => (
             <div
               key={index}
-              className="bg-white shadow-md rounded-lg p-6"
+              className="bg-white shadow-md rounded-lg p-6 dark:bg-gray-800"
             >
               <h3 className="text-xl font-semibold text-[#2189FF] mb-4">
                 {faq.title}
               </h3>
-              <p className="text-gray-700">
+              <p className="text-gray-700 dark:text-gray-400">
                 {faq.content}
               </p>
             </div>
@@ -260,7 +260,7 @@ const Home = () => {
         {filteredProducts.map((product) => (
           <div
             key={product.id}
-            className="bg-white rounded-lg shadow-md overflow-hidden cursor-pointer group relative transform transition-transform duration-300 hover:scale-105"
+            className="bg-white rounded-lg shadow-md overflow-hidden cursor-pointer group relative transform transition-transform duration-300 hover:scale-105 dark:bg-gray-800"
           >
             <div
               className="relative h-48 overflow-hidden"
@@ -283,7 +283,7 @@ const Home = () => {
                 </div>
               )}
               <img
-                src={product.img || product.images[currentImageIndex[product.id] || 0]}
+                src={product.img || product.images.map((image, index) => image)[currentImageIndex[product.id] || 0]}
                 alt={getLocalizedName(product)}
                 className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
                 loading="lazy"
@@ -313,7 +313,7 @@ const Home = () => {
               className="p-4"
               onClick={() => handleProductClick(product)}
             >
-              <h3 className="text-lg font-semibold mb-2 line-clamp-2 text-[#0B2441]">{getLocalizedName(product)}</h3>
+              <h3 className="text-lg font-semibold mb-2 line-clamp-2 text-[#0B2441] dark:text-white">{getLocalizedName(product)}</h3>
               <div className="flex items-center justify-between">
                 <span className="text-[#2189FF] font-bold">
                   {product.price ? `${product.price.toLocaleString()} so'm` : 'Narx ko\'rsatilmagan'}

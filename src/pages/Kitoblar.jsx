@@ -4,7 +4,8 @@ import { kitoblar } from '../data/JS/kitoblar';
 import { useLanguage } from '../context/LanguageContext';
 import { useCart } from '../context/CartContext';
 import ProductModal from '../components/ProductModal';
-import { notification } from 'antd';
+import { Button, notification } from 'antd';
+import { useNavigate } from 'react-router-dom';
 
 export default function Kitoblar() {
     const { t, currentLanguage } = useLanguage();
@@ -15,6 +16,10 @@ export default function Kitoblar() {
 
     // Use the kitoblar array directly
     const products = kitoblar;
+    const navigate = useNavigate();
+    const handleProductDetail = (productId) => {
+        navigate(`/product/kitoblar-${productId}`);
+    };
 
     const handleAddToCart = (product) => {
         const formattedProduct = {
@@ -70,8 +75,8 @@ export default function Kitoblar() {
     };
 
     return (
-        <div className="container mx-auto px-4 py-8">
-            <div id="kitoblar" className="my-16 h-auto py-2">
+        <div className="container mx-auto px-2 mb-16">
+            <div id="kitoblar" className="h-auto">
                 <div data-aos="fade-up" className='flex flex-col lg:flex-row items-center justify-between gap-3'>
                     <div className='flex flex-col items-start gap-4'>
                         <p className='text-[28px] font-bold text-[#0B2441] dark:text-white'>{t('books')}</p>
@@ -92,7 +97,7 @@ export default function Kitoblar() {
                     {products && products.map((product) => (
                         <div
                             key={product.id}
-                            className="bg-white rounded-lg shadow-md overflow-hidden cursor-pointer group relative transform transition-transform duration-300 hover:scale-105"
+                            className="bg-white rounded-lg shadow-md overflow-hidden cursor-pointer group relative transform transition-transform duration-300 hover:scale-105 dark:bg-gray-800"
                         >
                             <div
                                 className="relative h-48 overflow-hidden"
@@ -145,9 +150,15 @@ export default function Kitoblar() {
                                 className="p-4"
                                 onClick={() => handleProductClick(product)}
                             >
-                                <h3 className="text-lg font-semibold mb-2 line-clamp-2 text-[#0B2441]">{product.name}</h3>
+                                <h3 className="text-lg font-semibold mb-2 line-clamp-2 text-[#0B2441] dark:text-white">{product.name}</h3>
                                 <div className="flex items-center justify-between">
                                     <span className="text-[#2189FF] font-bold">{product.price.toLocaleString()} so'm</span>
+                                    <Button
+                                        type="primary"
+                                        onClick={() => handleProductDetail(product.id)}
+                                    >
+                                        Batafsil
+                                    </Button>
                                 </div>
                             </div>
                         </div>

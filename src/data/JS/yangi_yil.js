@@ -5,6 +5,7 @@ import qorbobo_kiym from '../../assets/yangi_yil/qorbobkiym.jpg'
 import chiroqlar from '../../assets/yangi_yil/chiroqlar.jpg'
 import archa from '../../assets/yangi_yil/archa.jpg'
 import bezaklar from '../../assets/yangi_yil/bezaklar.jpg'
+import qorkiym3 from '../../assets/yangi_yil/qorkiym3.jpg'
 
 
 
@@ -78,5 +79,17 @@ export const yangi_yil = [
             "https://images.uzum.uz/cstjedr4nkdilc6bdc30/original.jpg"
         ],
         "description": "Yangi yil uchun yumshoq va chiroyli Ded Moroz kukla"
+    },
+    {
+        "id": "ny7",
+        "name": "Bejirim ko'rinishda bolalar uchun qorbobo kiyim",
+        "price": 199000,
+        "categoryId": "yangi-yil",
+        "images": [
+            qorkiym3,
+            "https://images.uzum.uz/cstjedr4nkdilc6bdc30/original.jpg",
+            "https://images.uzum.uz/cstjedr4nkdilc6bdc30/original.jpg"
+        ],
+        "description": "Yangi yil bayramida bolalar uchun qulay va chiroyli qorbobo kiyim"
     },
 ];

@@ -4,7 +4,6 @@ import { useAuth } from '../context/AuthContext';
 import Loading from '../components/Loading';
 import { Footer } from '../components/Footer';
 import MaqishiyTex from '../pages/MaqishiyTex';
-import MaishiyTex from '../pages/MaishiyTex';
 
 // Lazy loaded pages
 const Home = lazy(() => import('../pages/Home'));
