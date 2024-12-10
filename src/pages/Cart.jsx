@@ -161,8 +161,8 @@ const Cart = () => {
             ))}
           </div>
           <div className="lg:col-span-1">
-            <div className="bg-gray-50 p-6 rounded-lg">
-              <h2 className="text-lg font-bold mb-4">{t('orderSummary')}</h2>
+            <div className="bg-gray-50 p-6 rounded-lg shadow">
+              <h2 className="text-lg font-bold mb-4 text-[#2189FF]">{t('orderSummary')}</h2>
               <Form
                 form={form}
                 layout="vertical"
@@ -171,6 +171,8 @@ const Cart = () => {
                 <Form.Item
                   name="name"
                   label={t('enterName')}
+                  className='dark:text-white'
+                  labelStyle={{ color: 'red' }}
                   rules={[{ required: true, message: t('required') }]}
                 >
                   <Input placeholder={t('enterName')} />
@@ -192,7 +194,7 @@ const Cart = () => {
                   <Input.TextArea placeholder={t('enterAddress')} rows={3} />
                 </Form.Item>
 
-                <div className="flex justify-between font-bold mb-4">
+                <div className="flex justify-between font-bold mb-4 ">
                   <span>{t('total')}:</span>
                   <span>{totalPrice.toLocaleString()} so'm</span>
                 </div>

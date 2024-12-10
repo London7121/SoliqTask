@@ -27,11 +27,11 @@ const Header = () => {
   const location = useLocation();
 
   const showDrawer = () => {
-    setDrawerVisible(true);
+    setDrawerVisible(!drawerVisible);
   };
 
   const onClose = () => {
-    setDrawerVisible(false);
+    setDrawerVisible(!drawerVisible);
   };
 
   const handleDrawerItemClick = (path) => {
@@ -221,16 +221,15 @@ const Header = () => {
           />
         </div> */}
 
-        <CategoryMenu />
+        {/* <CategoryMenu onClose={onClose} /> */}
 
-        <nav className="mt-4 space-y-4">
+        <nav className="mt-4 space-y-4 flex flex-col items-start border-b pb-4">
           {navigationLinks.map((link, index) => (
             link.name === 'Yangi Yil' ? (
               <Link
                 key={index}
                 to={link.path || '/yangi-yil'}
-                className="block w-full text-left text-gray-700 hover:text-[#2189FF]"
-                onClick={() => handleDrawerItemClick(link.path || '/yangi-yil')}
+                className="text-[#2189FF] hover:text-[#1a6cd1]"
               >
                 {link.name}
               </Link>
@@ -238,7 +237,7 @@ const Header = () => {
               <button
                 key={index}
                 onClick={link.onClick}
-                className="block w-full text-left text-gray-700 hover:text-[#2189FF]"
+                className="text-[#2189FF] hover:text-[#1a6cd1]"
               >
                 {link.name}
               </button>

@@ -5,7 +5,7 @@ import { useLanguage } from '../context/LanguageContext';
 import { useCart } from '../context/CartContext';
 import ProductModal from '../components/ProductModal';
 // import { Faqat } from '../components';
-import ayollar from '../data/ayollar.json';
+import {ayollar} from '../data/JS/ayollar';
 
 const Ayollar = ({ onProductClick }) => {
   const { t } = useLanguage();
@@ -14,7 +14,7 @@ const Ayollar = ({ onProductClick }) => {
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [isModalVisible, setIsModalVisible] = useState(false);
 
-  const products = ayollar.products;
+  const products = ayollar;
 
   const handleAddToCart = (product) => {
     const formattedProduct = {
@@ -70,12 +70,12 @@ const Ayollar = ({ onProductClick }) => {
   };
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <div className="my-16 h-auto py-2">
+    <div className="container mx-auto px-4 py-8 my-16">
+      <div className=" h-auto py-2">
         <div data-aos="fade-up" className='flex flex-col lg:flex-row items-center justify-between gap-3'>
           <div className='flex flex-col items-start gap-4'>
-            <p className='text-[28px] font-bold text-[#0B2441]'>Ayollar uchun</p>
-            <p className='text-[16px] font-normal text-[#64748B]'>{t('all_products')}</p>
+            <p className='text-[28px] font-bold text-[#0B2441] dark:text-white'>Ayollar uchun</p>
+            <p className='text-[16px] font-normal text-[#64748B] '>{t('all_products')}</p>
           </div>
           <div className='flex items-center gap-3'>
             <button className='w-[45px] h-[45px] rounded-[16px] bg-[#EAF4FF] flex items-center justify-center'>

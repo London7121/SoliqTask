@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { FaArrowRight, FaArrowLeft, FaShoppingCart, FaEye } from "react-icons/fa";
-import bolalar from '../data/bolalar.json';
+import {bolalar} from '../data/JS/bolalar';
 import { useLanguage } from '../context/LanguageContext';
 import { useCart } from '../context/CartContext';
 import ProductModal from '../components/ProductModal'; 
@@ -14,7 +14,7 @@ export default function Bolalar() {
     const [isModalVisible, setIsModalVisible] = useState(false);
 
     // Use the bolalar array directly
-    const products = bolalar.products;
+    const products = bolalar;
 
     const handleAddToCart = (product) => {
         const formattedProduct = {
@@ -74,8 +74,8 @@ export default function Bolalar() {
             <div id="bolalar" className="my-16 h-auto py-2">
                 <div data-aos="fade-up" className='flex flex-col lg:flex-row items-center justify-between gap-3'>
                     <div className='flex flex-col items-start gap-4'>
-                        <p className='text-[28px] font-bold text-[#0B2441]'>{t('children')}</p>
-                        <p className='text-[16px] font-normal text-[#64748B]'>{t('all_products')}</p>
+                        <p className='text-[28px] font-bold text-[#0B2441] dark:text-white'>{t('children')}</p>
+                        <p className='text-[16px] font-normal text-[#64748B] '>{t('all_products')}</p>
                     </div>
                     <div className='flex items-center gap-3'>
                         <button className='w-[45px] h-[45px] rounded-[16px] bg-[#EAF4FF] flex items-center justify-center'>
@@ -89,7 +89,7 @@ export default function Bolalar() {
 
                 {/* Products Grid */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mt-8">
-                    {products.map((product) => (
+                    {products && products.map((product) => (
                         <div
                             key={product.id}
                             className="bg-white rounded-lg shadow-md overflow-hidden cursor-pointer group relative transform transition-transform duration-300 hover:scale-105"

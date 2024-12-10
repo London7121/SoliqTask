@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { FaArrowRight, FaArrowLeft, FaShoppingCart, FaEye } from "react-icons/fa";
-import erkaklar from '../data/erkaklar.json';
+import {erkaklar} from '../data/JS/erkaklar';
 import { useLanguage } from '../context/LanguageContext';
 import { useCart } from '../context/CartContext';
 import ProductModal from '../components/ProductModal';
@@ -14,7 +14,7 @@ export default function Erkaklar() {
     const [isModalVisible, setIsModalVisible] = useState(false);
 
     // Use the erkaklar array directly
-    const products = erkaklar.products;
+    const products = erkaklar;
     console.log(products);
     
 
@@ -72,12 +72,12 @@ export default function Erkaklar() {
     };
 
     return (
-        <div className="container mx-auto px-4 ">
+        <div className="container mx-auto px-4 my-16">
             <div id="erkaklar" className="h-auto py-2">
                 <div data-aos="fade-up" className='flex flex-col lg:flex-row items-center justify-between gap-3'>
                     <div className='flex flex-col items-start gap-4'>
-                        <p className='text-[28px] font-bold text-[#0B2441]'>{t('men')}</p>
-                        <p className='text-[16px] font-normal text-[#64748B]'>{t('all_products')}</p>
+                        <p className='text-[28px] font-bold text-[#0B2441] dark:text-white'>{t('men')}</p>
+                        <p className='text-[16px] font-normal text-[#64748B] dark:text-white'>{t('all_products')}</p>
                     </div>
                     <div className='flex items-center gap-3'>
                         <button className='w-[45px] h-[45px] rounded-[16px] bg-[#EAF4FF] flex items-center justify-center'>

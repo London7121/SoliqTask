@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { BrowserRouter as Router, Route, useLocation } from 'react-router-dom';
 import { ProductProvider } from './context/ProductContext';
 import { LanguageProvider } from './context/LanguageContext';
 import { CartProvider } from './context/CartContext';
@@ -23,6 +23,12 @@ function AppContent() {
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isAddProductModalOpen, setIsAddProductModalOpen] = useState(false);
+
+  let location = useLocation();
+  useEffect(() => {
+    scrollTop();
+  }, [location.pathname]);
+
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);

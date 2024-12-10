@@ -1,11 +1,10 @@
 // images
-import person1 from '../assets/icons/call.png'
-import person2 from '../assets/images/person2.png'
-import person3 from '../assets/images/person3.png'
-import person4 from '../assets/images/person4.png'
-import person5 from '../assets/images/person5.png'
-import person6 from '../assets/images/person6.png'
-import qorqiz_kiym from '../assets/yangi_yil/qorqiz_kiym.jpg'
+import qorqiz_kiym from '../../assets/yangi_yil/qorqiz_kiym.jpg'
+import dedmoroz from '../../assets/yangi_yil/dedmoroz.jpg'
+import qorbobo_kiym from '../../assets/yangi_yil/qorbobkiym.jpg'
+import chiroqlar from '../../assets/yangi_yil/chiroqlar.jpg'
+import archa from '../../assets/yangi_yil/archa.jpg'
+import bezaklar from '../../assets/yangi_yil/bezaklar.jpg'
 
 
 
@@ -14,7 +13,6 @@ export const yangi_yil = [
         "id": "ny1",
         "name": "Bolalar uchun Qorbobo kiyimlari",
         "price": 129000,
-        "icon": person1,
         "categoryId": "yangi-yil",
         "images": [
             qorqiz_kiym,
@@ -27,6 +25,7 @@ export const yangi_yil = [
         "price": 79000,
         "categoryId": "yangi-yil",
         "images": [
+            bezaklar,
             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRTY_Mhafa-o6-RwLNsiw8PwXspog-M_WP0Tw&s",
             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRTY_Mhafa-o6-RwLNsiw8PwXspog-M_WP0Tw&s"
         ],
@@ -38,6 +37,7 @@ export const yangi_yil = [
         "price": 99000,
         "categoryId": "yangi-yil",
         "images": [
+            chiroqlar,
             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTaNSUxSFzxYF1u_Tb9890Kh7F5VlpguhidMuB-nTPtB1bAS8WSmi2TONF0IGcQ-ve8yc&usqp=CAU",
             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRTY_Mhafa-o6-RwLNsiw8PwXspog-M_WP0Tw&s"
         ],
@@ -49,6 +49,7 @@ export const yangi_yil = [
         "price": 429000,
         "categoryId": "yangi-yil",
         "images": [
+            archa,
             "https://images.uzum.uz/csg5vfdpq3ghb2qliu90/original.jpg",
             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRTY_Mhafa-o6-RwLNsiw8PwXspog-M_WP0Tw&s"
         ],
@@ -60,6 +61,7 @@ export const yangi_yil = [
         "price": 259000,
         "categoryId": "yangi-yil",
         "images": [
+            qorbobo_kiym,
             "https://images.uzum.uz/clnd09lenntcj8aablpg/original.jpg",
             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRTY_Mhafa-o6-RwLNsiw8PwXspog-M_WP0Tw&s"
         ],
@@ -71,7 +73,7 @@ export const yangi_yil = [
         "price": 129000,
         "categoryId": "yangi-yil",
         "images": [
-            qorqiz_kiym,
+            dedmoroz,
             "https://images.uzum.uz/cstjedr4nkdilc6bdc30/original.jpg",
             "https://images.uzum.uz/cstjedr4nkdilc6bdc30/original.jpg"
         ],

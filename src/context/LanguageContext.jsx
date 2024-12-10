@@ -66,7 +66,7 @@ const translations = {
     order_success_desc: 'Buyurtmangiz qabul qilindi. Tez orada siz bilan bog\'lanamiz.',
     order_error: 'Xatolik yuz berdi',
     order_error_desc: 'Buyurtmani yuborishda xatolik yuz berdi. Iltimos, qayta urinib ko\'ring.',
-    required: 'Majburiy maydon',
+    required: 'Iltimos maydonni to\'ldiring',
     processing: 'Yuborilmoqda...',
     monthly_sales: 'Oylik savdolar',
     product_stats: 'Mahsulotlar statistikasi',

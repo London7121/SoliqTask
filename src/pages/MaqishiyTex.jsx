@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { FaArrowRight, FaArrowLeft, FaShoppingCart, FaEye } from "react-icons/fa";
-import maishiy_tex from '../data/maishiy_tex.json';
+import {maishiy_tex} from '../data/JS/maishiy_tex';
 import { useLanguage } from '../context/LanguageContext';
 import { useCart } from '../context/CartContext';
 import ProductModal from '../components/ProductModal';
@@ -14,7 +14,7 @@ export default function MaqishiyTex() {
     const [isModalVisible, setIsModalVisible] = useState(false);
 
     // Use the maishiy_tex array directly
-    const products = maishiy_tex.products;
+    const products = maishiy_tex;
     console.log(products);
 
 
@@ -72,12 +72,12 @@ export default function MaqishiyTex() {
     };
 
     return (
-        <div className="container mx-auto px-4 ">
+        <div className="container mx-auto px-4 my-16">
             <div id="maishiyTex" className="h-auto py-2">
                 <div data-aos="fade-up" className='flex flex-col lg:flex-row items-center justify-between gap-3'>
                     <div className='flex flex-col items-start gap-4'>
-                        <p className='text-[28px] font-bold text-[#0B2441]'>{t('appliances')}</p>
-                        <p className='text-[16px] font-normal text-[#64748B]'>{t('all_products')}</p>
+                        <p className='text-[28px] font-bold text-[#0B2441] dark:text-white'>{t('appliances')}</p>
+                        <p className='text-[16px] font-normal text-[#64748B] '>{t('all_products')}</p>
                     </div>
                     <div className='flex items-center gap-3'>
                         <button className='w-[45px] h-[45px] rounded-[16px] bg-[#EAF4FF] flex items-center justify-center'>

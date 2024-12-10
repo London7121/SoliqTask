@@ -4,7 +4,7 @@ import { Dropdown, Menu } from 'antd';
 import { useProducts } from '../context/ProductContext';
 import { useLanguage } from '../context/LanguageContext';
 
-const CategoryMenu = () => {
+const CategoryMenu = ({onClose}) => {
   const navigate = useNavigate();
   const { categories } = useProducts();
   const { t, currentLanguage } = useLanguage();
@@ -12,6 +12,7 @@ const CategoryMenu = () => {
   const [drawerVisible, setDrawerVisible] = useState(false);
 
   const handleCategoryClick = (categoryPath) => {
+    // onClose();
     navigate(categoryPath);
     setIsHovered(false);
     setDrawerVisible(false);
@@ -26,7 +27,7 @@ const CategoryMenu = () => {
 
   const menuItems = categories.map((category) => ({
     key: category.id,
-    icon: <span className="text-xl mr-2">{category.icon}</span>,
+    // icon: <span className="text-xl mr-2">{category.icon}</span>,
     label: (
       <Menu.Item onClick={() => handleCategoryClick(`/${category.id}`)}>
         {getCategoryName(category)}

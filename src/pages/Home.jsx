@@ -68,12 +68,9 @@ const Home = () => {
   };
 
   const renderProductName = (product) => {
-    // Agar product.name ob'ekt bo'lsa, tilga qarab qiymatni olamiz
     if (typeof product.name === 'object') {
       return product.name[language] || product.name.uz || product.name.ru || '';
     }
-
-    // Agar oddiy satr bo'lsa, uni qaytaramiz
     return String(product.name || '');
   };
 
@@ -92,11 +89,10 @@ const Home = () => {
             key={category.id}
             type={selectedCategory === category.id ? 'primary' : 'default'}
             onClick={() => setSelectedCategory(category.id)}
-            className="flex items-center gap-2 w-[140px] h-[140px] flex flex-col justify-between border border-gray-300 rounded-md cursor-pointer shadow-md hover:shadow-lg hover:border-[#2189FF] hover:transform hover:scale-105 transition duration-300 ease-in-out"
+            className="flex items-center gap-2 w-[100px] h-[100px] md:w-[150px] md:h-[150px] flex flex-col justify-between border border-gray-300 rounded-md cursor-pointer shadow-md hover:shadow-lg hover:border-[#2189FF] hover:transform hover:scale-105 transition duration-300 ease-in-out"
           >
-
-            <img className='w-full h-[85px] object-cover p-1 rounded-t-md' src={category.icon} alt="icon" />
-            <p className='mb-3 flex items-center gap-2 justify-center'>
+            <img className='w-full h-[60px] md:h-[100px] object-cover p-1 rounded-t-md' src={category.icon} alt="icon" />
+            <p className='mb-3 flex items-center gap-2 justify-center text-[12px] md:text-[16px] px-2'>
               {category.name?.[language] || category.name}
               <Badge
                 count={products.filter(p => p.categoryId === category.id).length}
@@ -113,7 +109,7 @@ const Home = () => {
     <Drawer
       title={t('categories')}
       placement="left"
-      onClose={() => setDrawerVisible(false)}
+      onClose={() => setDrawerVisible(!drawerVisible)}
       open={drawerVisible}
     >
       <div className="flex flex-col gap-2">
@@ -137,7 +133,8 @@ const Home = () => {
             }}
             className="flex items-center gap-2 w-full"
           >
-            {category.icon} {category.name?.[language] || category.name}
+            {/* {category.icon}  */}
+            {category.name?.[language] || category.name}
             <Badge
               count={products.filter(p => p.categoryId === category.id).length}
               style={{ backgroundColor: '#52c41a' }}
