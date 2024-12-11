@@ -16,11 +16,11 @@ export default function MaqishiyTex() {
 
     // Use the maishiy_tex array directly
     const products = maishiy_tex;
-    const navigate = useNavigate();
     console.log(products);
+    const navigate = useNavigate();
     const handleProductDetail = (productId) => {
         navigate(`/product/maishiy-tex-${productId}`);
-      };
+    };
 
 
     const handleAddToCart = (product) => {
