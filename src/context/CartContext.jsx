@@ -12,19 +12,19 @@ const renderProductName = (product, currentLanguage = 'uz') => {
 
   // Agar name ob'ekt bo'lsa, tilga qarab qiymatni olamiz
   if (typeof product.name === 'object') {
-    return product.name[currentLanguage] || 
-           product.name.uz || 
-           product.name.ru || 
-           '';
+    return product.name[currentLanguage] ||
+      product.name.uz ||
+      product.name.ru ||
+      '';
   }
-  
+
   // Agar oddiy satr bo'lsa, uni qaytaramiz
   return String(product.name || '');
 };
 
 export const CartProvider = ({ children }) => {
   const { language } = useLanguage();
-  
+
   const [cartItems, setCartItems] = useState(() => {
     try {
       const savedCart = localStorage.getItem('cartItems');
@@ -78,19 +78,19 @@ export const CartProvider = ({ children }) => {
           i.id === item.id ? { ...i, quantity: i.quantity + 1 } : i
         );
       }
-      
+
       // Yangi mahsulotni tilga moslab qo'shish
       const newItem = {
         ...item,
         name: renderProductName(item, language),
         quantity: 1
       };
-      
+
       // Agar savatda bo'sh o'rin bo'lsa, yangi mahsulotni qo'shish
       if (prevItems.length < MAX_CART_ITEMS) {
         return [...prevItems, newItem];
       }
-      
+
       // Agar savat to'la bo'lsa, eng avvalgi mahsulotni o'chirib, yangi mahsulotni qo'shish
       return [...prevItems.slice(1), newItem];
     });

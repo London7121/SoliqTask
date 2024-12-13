@@ -80,6 +80,20 @@ const Cart = () => {
         }),
       });
 
+      // Local storage-ga buyurtmani saqlash
+      const existingOrders = JSON.parse(localStorage.getItem('orders') || '[]');
+      existingOrders.push({
+        userId: Date.now().toString(),
+        userName: values.name,
+        userPhone: values.phone,
+        address: values.address,
+        items: cartItems,
+        totalAmount: totalPrice,
+        status: 'new',
+        createdAt: new Date()
+      });
+      localStorage.setItem('orders', JSON.stringify(existingOrders));
+
       notification.success({
         message: t('order_success'),
         description: t('order_success_desc'),

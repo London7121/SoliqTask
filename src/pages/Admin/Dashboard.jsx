@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Card, Row, Col, Button, Table, Modal } from 'antd';
+import { Card, Row, Col, Button, Table, Modal, Menu, Statistic } from 'antd';
 import { Line, Column, Pie, Bar } from '@ant-design/plots';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
@@ -14,8 +14,21 @@ import {
   DownloadOutlined,
   QrcodeOutlined,
   ShoppingOutlined,
+  AppstoreOutlined,
+  UserOutlined
 } from '@ant-design/icons';
 
+/**
+ * Admin panel's dashboard page.
+ *
+ * This page shows the admin an overview of the store's sales, including
+ * the total number of products, total number of sold products, remaining
+ * products, and total revenue. It also shows a list of recent orders
+ * and allows the admin to view the details of each order.
+ *
+ * The page also includes a QR code generator for each order, which can
+ * be used to quickly view the order details.
+ */
 const Dashboard = () => {
   const { logout } = useAuth();
   const navigate = useNavigate();
@@ -112,7 +125,7 @@ const Dashboard = () => {
       'Products': order.items.length,
       'Total Amount': order.items.reduce((sum, item) => sum + (item.price * item.quantity), 0),
       'Date': new Date(order.date).toLocaleDateString('uz-UZ'),
-      'Items': order.items.map(item => `${item.title} (${item.quantity})`).join(', '),
+      'Items': order.items.map(item => `${item.name || item.title || 'Nomsiz mahsulot'} (${item.quantity}x${item.price})`).join(', '),
     }));
 
     // Excel yaratish
@@ -305,17 +318,25 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="p-6">
+    <div className="p-6 dark:bg-gray-950">
+      <div style={{
+        position: 'fixed',
+        top: 100,
+        left: 0,
+        right: 0,
+        background: '#fff',
+        zIndex: 1000,
+        padding: '1.5rem',
+        borderBottom: `1px solid #f0f0f0`
+      }}>
+        <Menu mode="horizontal" className="mb-6">
+          <Menu.Item key="products" icon={<ShoppingOutlined />} onClick={() => navigate('/admin/products')}>
+            Mahsulotlar
+          </Menu.Item>
+        </Menu>
       <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-bold">{t('admin_dashboard')}</h1>
+        <h1 className="text-2xl font-bold dark:text-gray-900">{t('admin_dashboard')}</h1>
         <div className="space-x-4">
-          {/* <Button
-            type="primary"
-            icon={<ShoppingOutlined />}
-            onClick={() => navigate('/admin/products')}
-          >
-            {t('manage_products')}
-          </Button> */}
           <Button
             type="primary"
             icon={<DownloadOutlined />}
@@ -328,123 +349,128 @@ const Dashboard = () => {
           </Button>
         </div>
       </div>
+      </div>
 
-      <Row gutter={[16, 16]}>
-        <Col xs={24} sm={12} lg={6}>
-          <Card className="text-center">
-            <InboxOutlined className="text-4xl text-blue-500 mb-2" />
-            <h2 className="text-lg font-semibold">{t('total_products')}</h2>
-            <p className="text-2xl">{stats.totalProducts}</p>
-          </Card>
-        </Col>
-        <Col xs={24} sm={12} lg={6}>
-          <Card className="text-center">
-            <ShoppingCartOutlined className="text-4xl text-green-500 mb-2" />
-            <h2 className="text-lg font-semibold">{t('total_sold')}</h2>
-            <p className="text-2xl">{stats.totalSold}</p>
-          </Card>
-        </Col>
-        <Col xs={24} sm={12} lg={6}>
-          <Card className="text-center">
-            <InboxOutlined className="text-4xl text-orange-500 mb-2" />
-            <h2 className="text-lg font-semibold">{t('remaining_products')}</h2>
-            <p className="text-2xl">{stats.remainingProducts}</p>
-          </Card>
-        </Col>
-        <Col xs={24} sm={12} lg={6}>
-          <Card className="text-center">
-            <DollarOutlined className="text-4xl text-purple-500 mb-2" />
-            <h2 className="text-lg font-semibold">{t('total_revenue')}</h2>
-            <p className="text-2xl">{stats.totalRevenue.toLocaleString()} so'm</p>
-          </Card>
-        </Col>
-      </Row>
+      <div style={{ marginTop: '40px' }}>
+        <Row gutter={[16, 16]}>
+          {/* Statistika kartalari */}
+          <Col xs={24} sm={12} lg={6}>
+            <Card
+              className=""
+              style={{
+                background: '#fff',
+                borderColor: '#f0f0f0'
+              }}
+            >
+              <Statistic
+                title={<span style={{ color: '#000000' }}>Jami mahsulotlar</span>}
+                value={stats.totalProducts}
+                prefix={<ShoppingOutlined />}
+                valueStyle={{ color: '#1890ff' }}
+              />
+            </Card>
+          </Col>
 
-      <Row gutter={[16, 16]} className="mt-6">
-        <Col xs={24} lg={12}>
-          <Card title={t('monthly_sales')}>
-            <Line {...monthlyConfig} />
-          </Card>
-        </Col>
-        <Col xs={24} lg={12}>
-          <Card title={t('product_stats')}>
-            <Column {...productConfig} />
-          </Card>
-        </Col>
-      </Row>
+          <Col xs={24} sm={12} lg={6}>
+            <Card
+              className=""
+              style={{
+                background: '#fff',
+                borderColor: '#f0f0f0'
+              }}
+            >
+              <Statistic
+                title={<span style={{ color: '#000000' }}>Faol foydalanuvchilar</span>}
+                value={93}
+                prefix={<UserOutlined />}
+                valueStyle={{ color: '#1890ff' }}
+              />
+            </Card>
+          </Col>
 
-      <Row gutter={[16, 16]} className="mt-6">
-        <Col xs={24} sm={24} md={12} lg={12}>
-          <Card title="Kategoriyalar bo'yicha sotuvlar">
-            <Pie {...categoryPieConfig} />
-          </Card>
-        </Col>
-        <Col xs={24} sm={24} md={12} lg={12}>
-          <Card title="Kunlik daromad">
-            <Bar {...dailyRevenueConfig} />
-          </Card>
-        </Col>
-      </Row>
+          <Col xs={24} sm={12} lg={6}>
+            <Card
+              className=""
+              style={{
+                background: '#fff',
+                borderColor: '#f0f0f0'
+              }}
+            >
+              <Statistic
+                title={<span style={{ color: '#000000' }}>Bugungi buyurtmalar</span>}
+                value={12}
+                prefix={<ShoppingCartOutlined />}
+                valueStyle={{ color: '#1890ff' }}
+              />
+            </Card>
+          </Col>
 
-      <Card className="mt-6">
-        <h2 className="text-xl font-semibold mb-4">{t('recent_orders')}</h2>
-        <Table
-          dataSource={getRecentOrders()}
-          columns={columns}
-          pagination={{ pageSize: 5 }}
-          rowKey="id"
-        />
-      </Card>
+          <Col xs={24} sm={12} lg={6}>
+            <Card
+              className=""
+              style={{
+                background: '#fff',
+                borderColor: '#f0f0f0'
+              }}
+            >
+              <Statistic
+                title={<span style={{ color: '#000000' }}>Jami daromad</span>}
+                value={9280}
+                prefix={<DollarOutlined />}
+                suffix="so'm"
+                valueStyle={{ color: '#1890ff' }}
+              />
+            </Card>
+          </Col>
 
-      <Modal
-        title={t('order_details')}
-        open={!!selectedOrder}
-        onCancel={() => setSelectedOrder(null)}
-        footer={null}
-      >
-        {selectedOrder && (
-          <div>
-            <p><strong>{t('order_id')}:</strong> {selectedOrder.id}</p>
-            <p><strong>{t('customer_name')}:</strong> {selectedOrder.customerInfo?.name}</p>
-            <p><strong>{t('customer_phone')}:</strong> {selectedOrder.customerInfo?.phone}</p>
-            <p><strong>{t('customer_address')}:</strong> {selectedOrder.customerInfo?.address}</p>
-            <p><strong>{t('order_date')}:</strong> {new Date(selectedOrder.date).toLocaleString('uz-UZ')}</p>
-            <h3 className="mt-4 mb-2">{t('ordered_items')}:</h3>
-            <ul>
-              {selectedOrder.items.map((item, index) => (
-                <li key={index}>
-                  {item.title} - {item.quantity} x {item.price.toLocaleString()} so'm = {(item.quantity * item.price).toLocaleString()} so'm
-                </li>
-              ))}
-            </ul>
-            <p className="mt-4"><strong>{t('total')}:</strong> {selectedOrder.items.reduce((sum, item) => sum + (item.price * item.quantity), 0).toLocaleString()} so'm</p>
-          </div>
-        )}
-      </Modal>
+          {/* Grafik */}
+          <Col xs={24} lg={16}>
+            <Card
+              title={<span style={{ color: '#000000' }}>Sotuvlar statistikasi</span>}
+              className=""
+              style={{
+                background: '#fff',
+                borderColor: '#f0f0f0'
+              }}
+            >
+              <Line {...monthlyConfig} />
+            </Card>
+          </Col>
 
-      <Modal
-        title={t('qr_code')}
-        open={qrModalVisible}
-        onCancel={() => setQrModalVisible(false)}
-        footer={null}
-      >
-        {currentQR && (
-          <div className="text-center">
-            <QRCodeSVG
-              value={JSON.stringify(currentQR)}
-              size={256}
-              level="H"
-              includeMargin={true}
-            />
-            <p className="mt-4">
-              <strong>{t('order_id')}:</strong> {currentQR.id}<br />
-              <strong>{t('customer_name')}:</strong> {currentQR.customer}<br />
-              <strong>{t('total')}:</strong> {currentQR.total.toLocaleString()} so'm<br />
-              <strong>{t('date')}:</strong> {currentQR.date}
-            </p>
-          </div>
-        )}
-      </Modal>
+          {/* Pie Chart */}
+          <Col xs={24} lg={8}>
+            <Card
+              title={<span style={{ color: '#000000' }}>Kategoriyalar bo'yicha</span>}
+              className=""
+              style={{
+                background: '#fff',
+                borderColor: '#f0f0f0'
+              }}
+            >
+              <Pie {...categoryPieConfig} />
+            </Card>
+          </Col>
+
+          {/* So'nggi buyurtmalar */}
+          <Col span={24}>
+            <Card
+              title={<span style={{ color: '#000000' }}>So'nggi buyurtmalar</span>}
+              className=""
+              style={{
+                background: '#fff',
+                borderColor: '#f0f0f0'
+              }}
+            >
+              <Table
+                dataSource={getRecentOrders()}
+                columns={columns}
+                pagination={false}
+                className=""
+              />
+            </Card>
+          </Col>
+        </Row>
+      </div>
     </div>
   );
 };

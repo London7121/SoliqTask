@@ -11,11 +11,9 @@ const ProductContext = createContext();
 export const ProductProvider = ({ children }) => {
   const [allProducts, setAllProducts] = useState([]);
   const [categories, setCategories] = useState([]);
-  console.log(yangi_yil);
 
 
   useEffect(() => {
-    // Mahsulotlarni birlashtirish
     const combinedProducts = [
       ...yangi_yil.map(item => ({
         ...item,
@@ -117,7 +115,6 @@ export const ProductProvider = ({ children }) => {
       product.category.toLowerCase() === categoryName.toLowerCase()
     );
   };
-  console.log(allProducts);
 
 
   return (

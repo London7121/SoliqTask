@@ -4,11 +4,13 @@ import { useAuth } from '../context/AuthContext';
 import Loading from '../components/Loading';
 import { Footer } from '../components/Footer';
 import MaqishiyTex from '../pages/MaqishiyTex';
+import Operators from '../pages/Admin/Operators';
 
 // Lazy loaded pages
 const Home = lazy(() => import('../pages/Home'));
 const Login = lazy(() => import('../pages/Admin/Login'));
 const Dashboard = lazy(() => import('../pages/Admin/Dashboard'));
+const Products = lazy(() => import('../pages/Admin/Products'));
 const Cart = lazy(() => import('../pages/Cart'));
 const CategoryPage = lazy(() => import('../pages/CategoryPage'));
 const ProductDetailPage = lazy(() => import('../pages/ProductDetailPage'));
@@ -42,6 +44,16 @@ const AppRoutes = ({ onProductClick }) => {
         <Route path="/admin/dashboard" element={
           <ProtectedRoute>
             <Dashboard />
+          </ProtectedRoute>
+        } />
+        <Route path="/admin/products" element={
+          <ProtectedRoute>
+            <Products />
+          </ProtectedRoute>
+        } />
+        <Route path="/admin/operators" element={
+          <ProtectedRoute>
+            <Operators />
           </ProtectedRoute>
         } />
         <Route path="/cart" element={<Cart />} />

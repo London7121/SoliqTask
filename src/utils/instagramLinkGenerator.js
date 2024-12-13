@@ -30,8 +30,6 @@ ${dynamicLink}
 #OyinchoqMashina #BalalarUchunSovga #PowerUz
     `;
 
-    console.log('Instagram post linki:', dynamicLink);
-    console.log('Post matni:', postText);
 
     return { dynamicLink, postText };
   } catch (error) {
@@ -40,5 +38,4 @@ ${dynamicLink}
   }
 };
 
-// Linkni darhol yaratish
 createInstagramProductLink();

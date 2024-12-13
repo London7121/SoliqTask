@@ -16,7 +16,6 @@ export default function Erkaklar() {
 
     // Use the erkaklar array directly
     const products = yangi_yil;
-    console.log(products);
     const navigate = useNavigate();
     const handleProductDetail = (productId) => {
         navigate(`/product/yangi-yil-${productId}`);

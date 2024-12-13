@@ -14,9 +14,7 @@ export default function MaqishiyTex() {
     const [selectedProduct, setSelectedProduct] = useState(null);
     const [isModalVisible, setIsModalVisible] = useState(false);
 
-    // Use the maishiy_tex array directly
     const products = maishiy_tex;
-    console.log(products);
     const navigate = useNavigate();
     const handleProductDetail = (productId) => {
         navigate(`/product/maishiy-tex-${productId}`);

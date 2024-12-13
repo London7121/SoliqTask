@@ -13,7 +13,6 @@ const ProductModal = ({ isOpen, onClose, product }) => {
   const { getLocalizedName, getLocalizedDescription } = useProducts();
   const [isAdded, setIsAdded] = useState(false);
   const [isInCart, setIsInCart] = useState(false);
-  console.log(product);
 
 
   useEffect(() => {

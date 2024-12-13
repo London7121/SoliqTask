@@ -14,13 +14,11 @@ export default function Erkaklar() {
     const [selectedProduct, setSelectedProduct] = useState(null);
     const [isModalVisible, setIsModalVisible] = useState(false);
 
-    // Use the erkaklar array directly
     const products = erkaklar;
-    console.log(products);
     const navigate = useNavigate();
     const handleProductDetail = (productId) => {
         navigate(`/product/erkaklar-${productId}`);
-      };
+    };
 
     const handleAddToCart = (product) => {
         const formattedProduct = {

@@ -10,7 +10,6 @@ import ProductModal from '../components/ProductModal';
 
 const Home = () => {
   const { products, categories, getLocalizedName } = useProducts();
-  console.log(categories.map(p => p));
 
   const { t, language } = useLanguage();
   const { addToCart } = useCart();
@@ -24,7 +23,6 @@ const Home = () => {
   const filteredProducts = selectedCategory === 'all'
     ? products
     : products.filter(product => product.categoryId === selectedCategory);
-  console.log(filteredProducts);
 
   const handleAddToCart = (product) => {
     addToCart(product);
@@ -38,8 +36,6 @@ const Home = () => {
   const handleProductClick = (product) => {
     setSelectedProduct(product);
     setIsModalVisible(true);
-    console.log(filteredProducts);
-
   };
 
   const handleCloseModal = () => {

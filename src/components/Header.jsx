@@ -4,7 +4,8 @@ import { Drawer, Input } from 'antd';
 import {
   MenuOutlined,
   SearchOutlined,
-  ShoppingCartOutlined
+  ShoppingCartOutlined,
+  UserOutlined
 } from '@ant-design/icons';
 import { MdDarkMode, MdLightMode } from 'react-icons/md';
 import { FaBars } from 'react-icons/fa';
@@ -213,54 +214,30 @@ const Header = () => {
         open={drawerVisible}
         className="mobile-drawer"
       >
-        {/* <div className="mb-4">
-          <Search 
-            placeholder={t('search')}
-            onSearch={handleSearch}
-            enterButton={<SearchOutlined />}
-          />
-        </div> */}
-
-        {/* <CategoryMenu onClose={onClose} /> */}
-
-        <nav className="mt-4 space-y-4 flex flex-col items-start border-b pb-4">
-          {navigationLinks.map((link, index) => (
-            link.name === 'Yangi Yil' ? (
-              <Link
-                key={index}
-                to={link.path || '/yangi-yil'}
-                className="text-[#2189FF] hover:text-[#1a6cd1]"
-              >
-                {link.name}
-              </Link>
-            ) : (
-              <button
-                key={index}
-                onClick={link.onClick}
-                className="text-[#2189FF] hover:text-[#1a6cd1]"
-              >
-                {link.name}
-              </button>
-            )
-          ))}
-        </nav>
-
-        <div className="mt-6 flex justify-between">
-          <button
-            onClick={() => {
-              navigate('/cart');
-              onClose();
-            }}
-            className="flex items-center space-x-2 text-gray-700 hover:text-[#2189FF]"
-          >
-            <ShoppingCartOutlined className="text-xl dark:text-blue-300" />
-            <span>{t('cart')}</span>
+        <div className="mobile-menu">
+          <Link to="/" onClick={onClose}>
+            Bosh sahifa
+          </Link>
+          <Link to="/products" onClick={onClose}>
+            Mahsulotlar
+          </Link>
+          <Link to="/about" onClick={onClose}>
+            Biz haqimizda
+          </Link>
+          <Link to="/contact" onClick={onClose}>
+            Aloqa
+          </Link>
+          <Link to="/cart" onClick={onClose} className="cart-link">
+            <ShoppingCartOutlined /> Savatcha
             {cartItems.length > 0 && (
-              <span className="bg-red-500 text-white text-xs rounded-full px-2 py-0.5 ml-2">
+              <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full px-2 py-0.5">
                 {cartItems.length}
               </span>
             )}
-          </button>
+          </Link>
+          <Link to="/admin/login" onClick={onClose} className="admin-link">
+            <UserOutlined /> Kirish
+          </Link>
         </div>
       </Drawer>
     </header>
