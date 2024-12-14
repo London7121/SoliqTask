@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { FaArrowRight, FaArrowLeft, FaShoppingCart, FaEye } from "react-icons/fa";
+import { FileSearchOutlined, InfoCircleOutlined } from '@ant-design/icons';
 import { maishiy_tex } from '../data/JS/maishiy_tex';
 import { useLanguage } from '../context/LanguageContext';
 import { useCart } from '../context/CartContext';
@@ -17,9 +18,8 @@ export default function MaqishiyTex() {
     const products = maishiy_tex;
     const navigate = useNavigate();
     const handleProductDetail = (productId) => {
-        navigate(`/product/maishiy-tex-${productId}`);
+        navigate(`/product/erkaklar-${productId}`);
     };
-
 
     const handleAddToCart = (product) => {
         const formattedProduct = {
@@ -42,7 +42,6 @@ export default function MaqishiyTex() {
     const handleProductClick = (product) => {
         const formattedProduct = {
             ...product,
-            id: product.id,
             name: product.name,
             price: product.price,
             image: product.images[0],
@@ -77,11 +76,11 @@ export default function MaqishiyTex() {
 
     return (
         <div className="container mx-auto px-2 mb-16">
-            <div id="maishiyTex" className="h-auto">
+            <div id="erkaklar" className="h-auto">
                 <div data-aos="fade-up" className='flex flex-col lg:flex-row items-center justify-between gap-3'>
                     <div className='flex flex-col items-start gap-4'>
                         <p className='text-[28px] font-bold text-[#0B2441] dark:text-white'>{t('appliances')}</p>
-                        <p className='text-[16px] font-normal text-[#64748B] '>{t('all_products')}</p>
+                        <p className='text-[16px] font-normal text-[#64748B] dark:text-white'>{t('all_products')}</p>
                     </div>
                     <div className='flex items-center gap-3'>
                         <button className='w-[45px] h-[45px] rounded-[16px] bg-[#EAF4FF] flex items-center justify-center'>
@@ -94,14 +93,14 @@ export default function MaqishiyTex() {
                 </div>
 
                 {/* Products Grid */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mt-8 ">
+                <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mt-8">
                     {products.map((product) => (
                         <div
                             key={product.id}
-                            className="bg-white rounded-lg shadow-md overflow-hidden cursor-pointer group relative transform transition-transform duration-300 hover:scale-105 dark:bg-gray-900"
+                            className="bg-white flex flex-col items-center justify-between rounded-lg shadow-md overflow-hidden cursor-pointer group relative transform transition-transform duration-300 hover:scale-105 dark:bg-gray-800"
                         >
                             <div
-                                className="relative h-48 overflow-hidden"
+                                className="relative w-full h-28 md:h-48 overflow-hidden"
                                 onClick={() => handleProductClick(product)}
                             >
                                 {product.images && product.images.length > 1 && (
@@ -123,7 +122,7 @@ export default function MaqishiyTex() {
                                 <img
                                     src={product.images?.[currentImageIndex[product.id] || 0] || product.images[0]}
                                     alt={product.name}
-                                    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                                    className="w-full h-full md:h-full object-cover transition-transform duration-300 group-hover:scale-110"
                                     loading="lazy"
                                 />
                                 <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-300 flex items-center justify-center space-x-4 opacity-0 group-hover:opacity-100">
@@ -148,17 +147,21 @@ export default function MaqishiyTex() {
                                 </div>
                             </div>
                             <div
-                                className="p-4"
+                                className="p-2 w-full"
                                 onClick={() => handleProductClick(product)}
                             >
-                                <h3 className="text-lg font-semibold mb-2 line-clamp-2 text-[#0B2441] dark:text-white">{product.name}</h3>
-                                <div className="flex items-center justify-between">
-                                    <span className="text-[#2189FF] font-bold">{product.price.toLocaleString()} so'm</span>
+                                <h3 className="text-sm md:text-lg font-semibold mb-2 line-clamp-2 text-[#0B2441] dark:text-white">{product.name}</h3>
+                                <div className="flex items-center justify-between gap-1 md:gap-0">
+                                    <span className="text-[#2189FF] font-semibold md:font-bold text-[11px] md:text-lg">
+                                        {product.price.toLocaleString()} so'm
+                                    </span>
                                     <Button
-                                        type="primary"
+                                        type="link"
+                                        className="text-[10px] md:text-[16px] mobile-icon-only border border-spacing-1 flex items-center justify-center"
+                                        icon={<FileSearchOutlined size={28} className="block md:hidden" />}
                                         onClick={() => handleProductDetail(product.id)}
                                     >
-                                        Batafsil
+                                        <p className="hidden md:inline">Batafsil</p>
                                     </Button>
                                 </div>
                             </div>

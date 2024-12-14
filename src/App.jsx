@@ -17,6 +17,7 @@ import { Footer } from './components/Footer';
 import ProductModal from './components/ProductModal';
 import YangiYil from './pages/YangiYil';
 import CategoryPage from './pages/CategoryPage';
+import {Banner} from './components/Banner';
 
 function AppContent() {
   const [isOpen, setIsOpen] = useState(false);
@@ -26,7 +27,7 @@ function AppContent() {
 
   const location = useLocation();
   useEffect(() => {
-    window.scrollTo(0, 0); 
+    window.scrollTo(0, 0);
   }, [location.pathname]);
 
 
@@ -55,14 +56,13 @@ function AppContent() {
       </Suspense>
 
       <Header isOpen={isOpen} toggleMenu={toggleMenu} onAddProduct={handleAddProduct} />
-
-      <AppRoutes 
+      <AppRoutes
         onProductClick={handleProductClick}
       />
 
-      <Suspense fallback={<Loading />}>
+      {/* <Suspense fallback={<Loading />}>
         <Footer />
-      </Suspense>
+      </Suspense> */}
 
       <Suspense fallback={<Loading />}>
         <ProductModal
@@ -71,7 +71,7 @@ function AppContent() {
           product={selectedProduct}
         />
       </Suspense>
-      
+
     </div>
   );
 }
@@ -100,20 +100,22 @@ function App() {
                 <Router>
                   <div className="min-h-screen bg-light-body dark:bg-dark-body text-light-text dark:text-dark-text transition-colors duration-300">
                     <Header />
+                    <Banner />
                     <SnowAnimation />
+
                     <div className="pt-24">
                       <AppRoutes>
                         <Route path="/yangi-yil" element={<YangiYil />} />
                       </AppRoutes>
                     </div>
                     {/* <Footer /> */}
-                    
-                    <ProductModal 
-                      isOpen={isModalOpen} 
-                      onClose={handleCloseModal} 
-                      product={selectedProduct} 
+
+                    <ProductModal
+                      isOpen={isModalOpen}
+                      onClose={handleCloseModal}
+                      product={selectedProduct}
                     />
-                    
+
                     <ScrollToTopButton />
                   </div>
                 </Router>

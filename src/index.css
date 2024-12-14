@@ -30,7 +30,7 @@
 body {
   background-color: var(--bg-primary);
   overflow-x: hidden;
-  padding-top: 120px; /* Adjusted to match header height */
+  /* padding-top: 100px; */
   color: var(--text-primary);
   transition: background-color 0.3s, color 0.3s;
 }
@@ -443,4 +443,18 @@ body {
 
 .admin-header h1 {
   margin-bottom: 0;
+}
+
+.discount-banner {
+  /* background-color: #ff6347; */
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  padding: 10px 0;
+  text-align: center;
+  border-bottom: 2px solid #e60000;
+}
+
+marquee {
+  font-family: Arial, sans-serif;
 }

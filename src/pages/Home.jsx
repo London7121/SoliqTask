@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Row, Col, Button, Drawer, Badge, notification } from 'antd';
-import { MenuOutlined } from '@ant-design/icons';
+import { FileSearchOutlined, MenuOutlined } from '@ant-design/icons';
 import { FaArrowLeft, FaArrowRight, FaEye, FaShoppingCart } from 'react-icons/fa';
 import { useProducts } from '../context/ProductContext';
 import { useLanguage } from '../context/LanguageContext';
@@ -85,7 +85,7 @@ const Home = () => {
             key={category.id}
             type={selectedCategory === category.id ? 'primary' : 'default'}
             onClick={() => setSelectedCategory(category.id)}
-            className="flex items-center gap-2 w-[100px] h-[100px] md:w-[150px] md:h-[150px] flex flex-col justify-between border border-gray-300 rounded-md cursor-pointer shadow-md hover:shadow-lg hover:border-[#2189FF] hover:transform hover:scale-105 transition duration-300 ease-in-out"
+            className="flex items-center gap-2 w-[113px] h-[113px] md:w-[150px] md:h-[150px]  flex-col justify-between border border-gray-300 rounded-md cursor-pointer shadow-md hover:shadow-lg hover:border-[#2189FF] hover:transform hover:scale-105 transition duration-300 ease-in-out"
           >
             <img className='w-full h-[60px] md:h-[100px] object-cover p-1 rounded-t-md' src={category.icon} alt="icon" />
             <p className='mb-3 flex items-center gap-2 justify-center text-[12px] md:text-[16px] px-2'>
@@ -252,14 +252,14 @@ const Home = () => {
 
       <CategoryDrawer />
 
-      <div className="grid grid-cols-1 my-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+      <div className="grid grid-cols-2 my-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
         {filteredProducts.map((product) => (
           <div
             key={product.id}
-            className="bg-white rounded-lg shadow-md overflow-hidden cursor-pointer group relative transform transition-transform duration-300 hover:scale-105 dark:bg-gray-800"
+            className="bg-white flex flex-col items-center justify-between rounded-lg shadow-md overflow-hidden cursor-pointer group relative transform transition-transform duration-300 hover:scale-105 dark:bg-gray-800"
           >
             <div
-              className="relative h-48 overflow-hidden"
+              className="relative w-full h-28 md:h-48 overflow-hidden"
               onClick={() => handleProductClick(product)}
             >
               {product.images && product.images.length > 1 && (
@@ -281,7 +281,7 @@ const Home = () => {
               <img
                 src={product.img || product.images.map((image, index) => image)[currentImageIndex[product.id] || 0]}
                 alt={getLocalizedName(product)}
-                className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                className="w-full h-full md:h-full object-cover transition-transform duration-300 group-hover:scale-110"
                 loading="lazy"
               />
               <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-300 flex items-center justify-center space-x-4 opacity-0 group-hover:opacity-100">
@@ -306,19 +306,21 @@ const Home = () => {
               </div>
             </div>
             <div
-              className="p-4"
+              className="p-4 w-full"
               onClick={() => handleProductClick(product)}
             >
-              <h3 className="text-lg font-semibold mb-2 line-clamp-2 text-[#0B2441] dark:text-white">{getLocalizedName(product)}</h3>
-              <div className="flex items-center justify-between">
-                <span className="text-[#2189FF] font-bold">
+              <h3 className="text-sm md:text-lg font-semibold mb-2 line-clamp-2 text-[#0B2441] dark:text-white">{getLocalizedName(product)}</h3>
+              <div className="flex items-center justify-between gap-1 md:gap-0">
+                <span className="text-[#2189FF] font-semibold md:font-bold text-[11px] md:text-lg">
                   {product.price ? `${product.price.toLocaleString()} so'm` : 'Narx ko\'rsatilmagan'}
                 </span>
                 <Button
                   type="primary"
+                  icon={<FileSearchOutlined size={28} className="block md:hidden" />}
                   onClick={() => handleProductDetail(product.id)}
+                  className="text-[10px] md:text-[16px] mobile-icon-only border border-spacing-1 flex items-center justify-center"
                 >
-                  Batafsil
+                  <p className="hidden md:inline">Batafsil</p>
                 </Button>
               </div>
             </div>
