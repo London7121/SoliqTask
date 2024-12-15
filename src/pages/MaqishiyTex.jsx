@@ -18,7 +18,7 @@ export default function MaqishiyTex() {
     const products = maishiy_tex;
     const navigate = useNavigate();
     const handleProductDetail = (productId) => {
-        navigate(`/product/erkaklar-${productId}`);
+        navigate(`/product/maishiy-tex-${productId}`);
     };
 
     const handleAddToCart = (product) => {

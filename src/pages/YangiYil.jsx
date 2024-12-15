@@ -18,7 +18,7 @@ export default function YangiYil() {
     const products = yangi_yil;
     const navigate = useNavigate();
     const handleProductDetail = (productId) => {
-        navigate(`/product/erkaklar-${productId}`);
+        navigate(`/product/yangi-yil-${productId}`);
     };
 
     const handleAddToCart = (product) => {
@@ -76,7 +76,7 @@ export default function YangiYil() {
 
     return (
         <div className="container mx-auto px-2 mb-16">
-            <div id="bolalar" className="h-auto">
+            <div id="yangi-yil" className="h-auto">
                 <div data-aos="fade-up" className='flex flex-col lg:flex-row items-center justify-between gap-3'>
                     <div className='flex flex-col items-start gap-4'>
                         <p className='text-[28px] font-bold text-[#0B2441] dark:text-white'>{t('Yangi yil sovg\'alari')}</p>

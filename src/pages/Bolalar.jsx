@@ -18,7 +18,7 @@ export default function Bolalar() {
     const products = bolalar;
     const navigate = useNavigate();
     const handleProductDetail = (productId) => {
-        navigate(`/product/erkaklar-${productId}`);
+        navigate(`/product/bolalar-${productId}`);
     };
 
     const handleAddToCart = (product) => {

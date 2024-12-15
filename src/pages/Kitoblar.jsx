@@ -18,7 +18,7 @@ export default function Kitoblar() {
     const products = kitoblar;
     const navigate = useNavigate();
     const handleProductDetail = (productId) => {
-        navigate(`/product/erkaklar-${productId}`);
+        navigate(`/product/kitoblar-${productId}`);
     };
 
     const handleAddToCart = (product) => {

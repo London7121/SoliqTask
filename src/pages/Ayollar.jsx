@@ -18,7 +18,7 @@ export default function Ayollar() {
     const products = ayollar;
     const navigate = useNavigate();
     const handleProductDetail = (productId) => {
-        navigate(`/product/erkaklar-${productId}`);
+        navigate(`/product/ayollar-${productId}`);
     };
 
     const handleAddToCart = (product) => {
@@ -75,7 +75,7 @@ export default function Ayollar() {
     };
 
     return (
-        <div className="container mx-auto px-2 mb-16">
+        <div className="container mx-auto px-2 mb-16 md:mt-6">
             <div id="erkaklar" className="h-auto">
                 <div data-aos="fade-up" className='flex flex-col lg:flex-row items-center justify-between gap-3'>
                     <div className='flex flex-col items-start gap-4'>

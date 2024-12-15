@@ -10,73 +10,23 @@ import AppRoutes from './routes/AppRoutes';
 import SnowAnimation from './components/SnowAnimation';
 import Header from './components/Header';
 import Loading from './components/Loading';
-import { Link as ScrollLink } from 'react-scroll';
 import { Suspense } from 'react';
 import { ScrollToTopButton } from './components/ScrollTopButton';
-import { Footer } from './components/Footer';
 import ProductModal from './components/ProductModal';
-import YangiYil from './pages/YangiYil';
-import CategoryPage from './pages/CategoryPage';
-import {Banner} from './components/Banner';
+import { Banner } from './components/Banner';
+import ScrollToTop from './services/scrollTop';
+import WelcomeSound from './services/welcomeSound';
+import Countdown from './services/countDown';
 
 function AppContent() {
-  const [isOpen, setIsOpen] = useState(false);
-  const [selectedProduct, setSelectedProduct] = useState(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isAddProductModalOpen, setIsAddProductModalOpen] = useState(false);
-
+  const [showBanner, setShowBanner] = useState(false);
   const location = useLocation();
+
   useEffect(() => {
-    window.scrollTo(0, 0);
+    const showBannerRoutes = ['/', '/home', '/yangi-yil'];
+    setShowBanner(showBannerRoutes.includes(location.pathname));
   }, [location.pathname]);
 
-
-  const toggleMenu = () => {
-    setIsOpen(!isOpen);
-  };
-
-  const handleProductClick = (product) => {
-    setSelectedProduct(product);
-    setIsModalOpen(true);
-  };
-
-  const handleAddProduct = () => {
-    setIsAddProductModalOpen(true);
-  };
-
-  const handleModalClose = () => {
-    setIsModalOpen(false);
-    setSelectedProduct(null);
-  };
-
-  return (
-    <div className="max-w-[1450px] mx-auto">
-      <Suspense fallback={<Loading />}>
-        <ScrollToTopButton />
-      </Suspense>
-
-      <Header isOpen={isOpen} toggleMenu={toggleMenu} onAddProduct={handleAddProduct} />
-      <AppRoutes
-        onProductClick={handleProductClick}
-      />
-
-      {/* <Suspense fallback={<Loading />}>
-        <Footer />
-      </Suspense> */}
-
-      <Suspense fallback={<Loading />}>
-        <ProductModal
-          isOpen={isModalOpen}
-          onClose={handleModalClose}
-          product={selectedProduct}
-        />
-      </Suspense>
-
-    </div>
-  );
-}
-
-function App() {
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -91,6 +41,27 @@ function App() {
   };
 
   return (
+    <div className="min-h-screen bg-light-body dark:bg-dark-body text-light-text dark:text-dark-text transition-colors duration-300">
+      <ScrollToTop />
+      <Header />
+      <Countdown/>
+      {showBanner && <Banner />}
+      <SnowAnimation />
+      <div className="pt-24">
+        <AppRoutes onProductClick={handleProductClick} />
+      </div>
+      <ProductModal
+        isOpen={isModalOpen}
+        onClose={handleCloseModal}
+        product={selectedProduct}
+      />
+      <ScrollToTopButton />
+    </div>
+  );
+}
+
+function App() {
+  return (
     <AuthProvider>
       <ThemeProvider>
         <LanguageProvider>
@@ -98,26 +69,8 @@ function App() {
             <CartProvider>
               <OrderProvider>
                 <Router>
-                  <div className="min-h-screen bg-light-body dark:bg-dark-body text-light-text dark:text-dark-text transition-colors duration-300">
-                    <Header />
-                    <Banner />
-                    <SnowAnimation />
-
-                    <div className="pt-24">
-                      <AppRoutes>
-                        <Route path="/yangi-yil" element={<YangiYil />} />
-                      </AppRoutes>
-                    </div>
-                    {/* <Footer /> */}
-
-                    <ProductModal
-                      isOpen={isModalOpen}
-                      onClose={handleCloseModal}
-                      product={selectedProduct}
-                    />
-
-                    <ScrollToTopButton />
-                  </div>
+                  {/* <WelcomeSound/> */}
+                  <AppContent />
                 </Router>
               </OrderProvider>
             </CartProvider>
