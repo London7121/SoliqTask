@@ -5,7 +5,9 @@ import { useCart } from '../context/CartContext';
 import { useLanguage } from '../context/LanguageContext';
 import { useOrders } from '../context/OrderContext';
 import { useNavigate } from 'react-router-dom';
-import { FaTrash } from 'react-icons/fa';
+import { Empty } from 'antd';
+
+// import emptyCartGif from '../assets/empty-cart.gif';
 
 const Cart = () => {
   const navigate = useNavigate();
@@ -67,7 +69,7 @@ const Cart = () => {
 
       const botToken = import.meta.env.VITE_TELEGRAM_BOT_TOKEN;
       const chatId = import.meta.env.VITE_TELEGRAM_CHAT_ID;
-      
+
       await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
         method: 'POST',
         headers: {
@@ -102,7 +104,6 @@ const Cart = () => {
       form.resetFields();
       clearCart();
     } catch (error) {
-      console.error('Error submitting order:', error);
       notification.error({
         message: t('order_error'),
         description: t('order_error_desc'),
@@ -128,10 +129,19 @@ const Cart = () => {
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <h1 className="text-2xl font-bold mb-6">{t('cart')}</h1>
+      <h1 className="text-2xl font-bold mb-6 text-[#0B2441] dark:text-white">{t('cart')}</h1>
       {cartItems.length === 0 ? (
         <div className="text-center py-8">
-          <p className="text-gray-500">{t('cartEmpty')}</p>
+          {/* <div style={{ textAlign: 'center', padding: '50px' }}> */}
+            <Empty
+              // image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSRF-1pAYQsso3W1JR0jqT_a78n9LVXZ3Bazg&s" 
+              imageStyle={{
+                height: 200,
+              }}
+              description={null}
+            />
+          {/* </div> */}
+          <p className="text-[#0B2441] text-lg dark:text-white">{t('cartEmpty')}</p>
         </div>
       ) : (
         <div className="grid lg:grid-cols-3 gap-8">
@@ -139,10 +149,10 @@ const Cart = () => {
             {cartItems.map((item) => (
               <div key={item.id} className="flex items-center justify-between border-b py-4">
                 <div className="flex items-center space-x-4">
-                  <img 
-                    src={item.image || item.images?.[0] || 'default-image-url'} 
-                    alt={item.title || item.name || 'Mahsulot'} 
-                    className="w-20 h-20 object-cover rounded" 
+                  <img
+                    src={item.image || item.images?.[0] || 'default-image-url'}
+                    alt={item.title || item.name || 'Mahsulot'}
+                    className="w-20 h-20 object-cover rounded"
                   />
                   <div>
                     <h3 className="font-medium">{item.title || item.name || 'Noma\'lum mahsulot'}</h3>

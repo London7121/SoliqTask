@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { Button, Typography, Space, Divider, Image } from 'antd';
+import { Button, Typography, Space, Divider, Image, notification } from 'antd';
 import { ShoppingCartOutlined, HeartOutlined } from '@ant-design/icons';
 import { useCart } from '../context/CartContext';
 import { useProducts } from '../context/ProductContext';
@@ -32,7 +32,11 @@ const ProductDetailPage = () => {
 
   const handleAddToCart = () => {
     addToCart(product);
-  };
+    notification.success({
+      message: 'Mahsulot savatchaga qo\'shildi!',
+      description: `${product.name || 'Mahsulot'} muvaffaqiyatli savatchaga qo'shildi.`,
+      duration: 2,
+    });  };
 
   return (
     <div className="container mx-auto px-4 py-8">
@@ -81,7 +85,7 @@ const ProductDetailPage = () => {
               icon={<ShoppingCartOutlined />}
               onClick={handleAddToCart}
             >
-              Savatga qo\'shish
+              Savatga qo'shish
             </Button>
             <Button
               icon={<HeartOutlined />}

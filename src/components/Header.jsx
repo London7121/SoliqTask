@@ -213,6 +213,7 @@ const Header = () => {
           title={<img src={logo} alt="Power.uz Logo" className="h-10 w-auto" />}
           placement="right"
           onClose={onClose}
+          width={280}
           open={drawerVisible}
           className="mobile-drawer"
         >

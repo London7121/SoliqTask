@@ -17,7 +17,6 @@ const Operators = () => {
     const loadData = () => {
       // Local storage-dan ma'lumotlarni olish
       const orders = JSON.parse(localStorage.getItem('orders') || '[]');
-      console.log(orders);
       
       // Oxirgi 20 ta buyurtma
       const recent = orders
@@ -50,7 +49,6 @@ const Operators = () => {
         });
       });
       setProductStats(Object.values(products));
-      console.log(productStats);
       
 
       // Mijozlar ma'lumotlarini yangilash
@@ -87,7 +85,6 @@ const Operators = () => {
     totalCustomers: customers.length,
     totalRevenue: recentOrders.reduce((sum, order) => sum + order.total, 0)
   };
-  console.log(customers);
   
 
   const recentOrderColumns = [

@@ -105,6 +105,7 @@ const Home = () => {
     <Drawer
       title={t('categories')}
       placement="left"
+      width={250}
       onClose={() => setDrawerVisible(!drawerVisible)}
       open={drawerVisible}
     >
